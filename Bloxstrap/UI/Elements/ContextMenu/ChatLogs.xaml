@@ -1,4 +1,4 @@
-﻿<base:WpfUiWindow x:Class="Voidstrap.UI.Elements.ContextMenu.ChatLogs"
+<base:WpfUiWindow x:Class="Voidstrap.UI.Elements.ContextMenu.ChatLogs"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -34,7 +34,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ui:TitleBar Grid.Row="0" Grid.ColumnSpan="2" Padding="8" x:Name="RootTitleBar" Title="{x:Static resources:Strings.ContextMenu_MessageLogs_Title}" ShowMinimize="True" ShowMaximize="False" CanMaximize="False" KeyboardNavigation.TabNavigation="None" Icon="pack://application:,,,/Voidstrap.ico" />
+        <ui:TitleBar Grid.Row="0" Grid.ColumnSpan="2" Padding="8" x:Name="RootTitleBar" Title="{x:Static resources:Strings.ContextMenu_MessageLogs_Title}" ShowMinimize="True" ShowMaximize="False" CanMaximize="False" KeyboardNavigation.TabNavigation="None" Icon="pack://application:,,,/Bloodstrap.ico" />
 
         <TextBlock Grid.Row="1" Margin="16,8,16,0" Text="{x:Static resources:Strings.ContextMenu_MessageLogs_Description}" TextWrapping="Wrap" />
 

@@ -41,7 +41,7 @@
             Grid.Row="0"
             Padding="8"
             ForceShutdown="False"
-            Icon="pack://application:,,,/Voidstrap.ico"
+            Icon="pack://application:,,,/Bloodstrap.ico"
             MinimizeToTray="False"
             UseSnapLayout="True" />
 

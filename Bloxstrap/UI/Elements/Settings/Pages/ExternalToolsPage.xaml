@@ -77,6 +77,7 @@
             <StackPanel>
                 <TextBlock Text="Tool Name" FontWeight="SemiBold" Margin="0,0,0,4"/>
                 <ui:TextBox x:Name="ToolNameTextBox" 
+                           Icon="Apps24"
                            PlaceholderText="e.g., Discord, OBS Studio, etc."
                            Margin="0,0,0,12"/>
                 
@@ -88,6 +89,7 @@
                     </Grid.ColumnDefinitions>
                     <ui:TextBox x:Name="ToolPathTextBox" 
                                Grid.Column="0"
+                               Icon="Folder24"
                                PlaceholderText="C:\Path\To\Program.exe"
                                Margin="0,0,8,0"/>
                     <ui:Button Grid.Column="1" 
@@ -98,6 +100,7 @@
                 
                 <TextBlock Text="Arguments (Optional)" FontWeight="SemiBold" Margin="0,0,0,4"/>
                 <ui:TextBox x:Name="ToolArgumentsTextBox" 
+                           Icon="Code24"
                            PlaceholderText="Command line arguments"
                            Margin="0,0,0,16"/>
                 

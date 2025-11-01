@@ -9,7 +9,7 @@ where dotnet >nul 2>nul
 if %ERRORLEVEL% EQU 0 (
     echo Using .NET SDK to build...
     echo.
-    dotnet build Voidstrap.sln -c Release
+    dotnet build Bloxstrap\Voidstrap.csproj -c Release
     if %ERRORLEVEL% EQU 0 (
         echo.
         echo ========================================

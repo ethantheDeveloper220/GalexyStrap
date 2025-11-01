@@ -42,7 +42,7 @@ namespace Voidstrap.UI.Elements.Dialogs
             System.Windows.MessageBox.Show("Roblox Settings page is available in the main settings menu.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        // Voidstrap Features
+        // Bloodstrap Features
         private void OpenAccountConsole_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.MessageBox.Show("Account Console requires additional context to open.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);

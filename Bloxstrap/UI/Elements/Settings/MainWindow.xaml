@@ -69,7 +69,7 @@
                      Timeout="2100" />
 
         <ui:Snackbar x:Name="SettingsSavedLaunchSnackbar"
-                     Title="Voidstrap Saved And Launched Roblox!"
+                     Title="Bloodstrap Saved And Launched Roblox!"
                      Grid.RowSpan="10"
                      Margin="150,0,150,20"
                      Panel.ZIndex="10"
@@ -86,7 +86,7 @@
                      MinimizeToTray="False"
                      UseSnapLayout="True"
                      Title="{x:Static resources:Strings.Menu_Title}"
-                     Icon="pack://application:,,,/Voidstrap.ico" />
+                     Icon="pack://application:,,,/Bloodstrap.ico" />
 
         <!-- Main Content -->
         <Grid x:Name="RootGrid"
@@ -110,22 +110,39 @@
                                  SelectedPageIndex="0">
                 <!-- Items -->
                 <ui:NavigationFluent.Items>
-                    <ui:NavigationItem Content="Voidstrap News" Icon="News16" PageType="{x:Type pages:NewsPage}" />
+                    <!-- GENERAL -->
+                    <ui:NavigationItem Content="Bloodstrap News" Icon="News16" PageType="{x:Type pages:NewsPage}" />
                     <ui:NavigationItem Content="{x:Static resources:Strings.Menu_Integrations_Title}" Icon="Add12" PageType="{x:Type pages:IntegrationsPage}" />
                     <ui:NavigationItem Content="Deployment" Icon="PlaySettings20" PageType="{x:Type pages:BehaviourPage}" />
+                    <ui:NavigationSeparator />
+                    
+                    <!-- CUSTOMIZATION -->
                     <ui:NavigationItem Content="Modifications" Icon="WrenchScrewdriver20" PageType="{x:Type pages:ModsPage}" />
+                    <ui:NavigationItem Content="Appearance" Icon="PaintBucket24" PageType="{x:Type pages:AppearancePage}" />
+                    <ui:NavigationSeparator />
+                    
+                    <!-- ADVANCED -->
                     <ui:NavigationItem Content="FastFlag Editor"
                                        Icon="Flag28"
                                        PageType="{x:Type pages:FastFlagEditorPage}"
                                        Visibility="{Binding IsFastFlagEditorVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
                     <ui:NavigationItem Content="FastFlag Settings" Icon="Settings28" PageType="{x:Type pages:FastFlagsPage}" />
                     <ui:NavigationItem Content="Global Settings" Icon="GlobeLocation24" PageType="{x:Type pages:GBSEditorPage}" />
-                    <ui:NavigationItem Content="Appearance" Icon="PaintBucket24" PageType="{x:Type pages:AppearancePage}" />
+                    <ui:NavigationSeparator />
+                    
+                    <!-- TOOLS -->
                     <ui:NavigationItem Content="{x:Static resources:Strings.Common_Shortcuts}" Icon="Apps32" PageType="{x:Type pages:ShortcutsPage}" />
-                    <ui:NavigationItem Content="Help" Icon="ChatHelp20" PageType="{x:Type pages:HelpPage}" />
-                    <ui:NavigationItem Content="Backup &amp; Restore" Icon="ArrowExportLtr24" PageType="{x:Type pages:BackupPage}" />
                     <ui:NavigationItem Content="External Tools" Icon="Apps24" PageType="{x:Type pages:ExternalToolsPage}" />
                     <ui:NavigationItem Content="Gameplay Tools" Icon="Games24" PageType="{x:Type pages:GameplayToolsPage}" />
+                    <ui:NavigationItem Content="Player Status/Inventory" Icon="PersonAccounts24" PageType="{x:Type pages:PlayerStatusPage}" />
+                    <ui:NavigationSeparator />
+                    
+                    <!-- SYSTEM -->
+                    <ui:NavigationItem Content="Notifications" Icon="Alert24" PageType="{x:Type pages:NotificationsPage}" />
+                    <ui:NavigationItem Content="Webhooks" Icon="Link24" PageType="{x:Type pages:WebhooksPage}" />
+                    <ui:NavigationItem Content="Logging &amp; Debugging" Icon="Bug24" PageType="{x:Type pages:LoggingPage}" />
+                    <ui:NavigationItem Content="Backup &amp; Restore" Icon="ArrowExportLtr24" PageType="{x:Type pages:BackupPage}" />
+                    <ui:NavigationItem Content="Help" Icon="ChatHelp20" PageType="{x:Type pages:HelpPage}" />
                 </ui:NavigationFluent.Items>
 
                 <!-- Footer -->

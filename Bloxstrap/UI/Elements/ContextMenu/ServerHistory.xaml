@@ -1,4 +1,4 @@
-﻿<base:WpfUiWindow x:Class="Voidstrap.UI.Elements.ContextMenu.ServerHistory"
+<base:WpfUiWindow x:Class="Voidstrap.UI.Elements.ContextMenu.ServerHistory"
                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -45,7 +45,7 @@
                      ShowMinimize="False"
                      ShowMaximize="False"
                      CanMaximize="False"
-                     Icon="pack://application:,,,/Voidstrap.ico"
+                     Icon="pack://application:,,,/Bloodstrap.ico"
                      Background="{DynamicResource WindowTitleBarBackgroundBrush}" />
 
         <TextBlock Grid.Row="1"

@@ -122,7 +122,7 @@
             <ui:CardExpander.Header>
                 <StackPanel>
                     <TextBlock FontSize="14" Text="Cleaner" />
-                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="Voidstrap will remove old data to save on space" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="Bloodstrap will remove old data to save on space" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
                 </StackPanel>
             </ui:CardExpander.Header>
             <StackPanel>

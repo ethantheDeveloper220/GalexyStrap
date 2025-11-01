@@ -1,16 +1,16 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using Voidstrap.UI.Elements.About;
+using Voidstrap.Helpers;
 
 namespace Voidstrap.UI.ViewModels.Settings
 {
     public class MainWindowViewModel : NotifyPropertyChangedViewModel
     {
-
         public ICommand OpenAboutCommand => new RelayCommand(OpenAbout);
 
         public ICommand SaveSettingsCommand => new RelayCommand(SaveSettings);
@@ -53,6 +53,8 @@ namespace Voidstrap.UI.ViewModels.Settings
         {
             const string LOG_IDENT = "MainWindowViewModel::SaveSettings";
 
+            ActivityLogger.Log("Saving settings...", LogLevel.Info);
+            
             App.Settings.Save();
             App.State.Save();
             App.FastFlags.Save();
@@ -64,12 +66,14 @@ namespace Voidstrap.UI.ViewModels.Settings
                 if (task.Changed)
                 {
                     App.Logger.WriteLine(LOG_IDENT, $"Executing pending task '{task}'");
+                    ActivityLogger.Log($"Executing pending task: {task}", LogLevel.Debug);
                     task.Execute();
                 }
             }
 
             App.PendingSettingTasks.Clear();
 
+            ActivityLogger.LogSuccess("Settings saved successfully");
             RequestSaveNoticeEvent?.Invoke(this, EventArgs.Empty);
         }
 

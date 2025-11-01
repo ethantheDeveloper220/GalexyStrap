@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using Voidstrap.Enums;
+using Voidstrap.UI.Elements.Dialogs;
 
 namespace Voidstrap.Models.Persistable
 {
@@ -119,6 +120,29 @@ namespace Voidstrap.Models.Persistable
         public bool IsGameEnabled { get; set; } = false;
         public bool IsBetterServersEnabled { get; set; } = false;
         public bool OverClockGPU { get; set; } = false;
+
+        // Notification Settings
+        public bool UseTrayTip { get; set; } = true;
+        public bool UseMessageBox { get; set; } = false;
+        public bool NotifyOnGameLaunch { get; set; } = true;
+        public bool NotifyOnGameClose { get; set; } = false;
+        public bool NotifyOnUpdate { get; set; } = true;
+        public bool NotifyOnSettingsSaved { get; set; } = true;
+        public bool NotifyOnErrors { get; set; } = true;
+        public bool NotifyOnBloodstrapUpdate { get; set; } = true;
+        public int TrayTipDuration { get; set; } = 5;
+        public bool PlayNotificationSound { get; set; } = true;
+
+        // Webhook Settings (Legacy - kept for backwards compatibility)
+        public string WebhookUrl { get; set; } = "";
+        public string WebhookUsername { get; set; } = "Bloodstrap";
+        public bool WebhookOnGameLaunch { get; set; } = false;
+        public bool WebhookOnGameClose { get; set; } = false;
+        public bool WebhookOnUpdate { get; set; } = false;
+        public bool WebhookOnError { get; set; } = false;
+
+        // New Webhook Manager Configuration
+        public WebhookConfig? WebhookConfig { get; set; } = null;
     }
 
     public class ExternalTool

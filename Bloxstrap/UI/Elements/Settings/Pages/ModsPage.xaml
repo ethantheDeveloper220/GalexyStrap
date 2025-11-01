@@ -1,4 +1,4 @@
-﻿<ui:UiPage
+<ui:UiPage
     x:Class="Voidstrap.UI.Elements.Settings.Pages.ModsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -286,7 +286,7 @@
                                                     <ColumnDefinition Width="*" />
                                                     <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
-                                                <ui:TextBox Grid.Column="0" PlaceholderText="Custom Cursor Set 1" Text="{Binding SelectedCustomCursorSetName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" />
+                                                <ui:TextBox Grid.Column="0" Icon="Cursor24" PlaceholderText="Custom Cursor Set 1" Text="{Binding SelectedCustomCursorSetName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" />
                                                 <ui:Button Grid.Column="1" Margin="4,0,0,0" Icon="Edit28" Content="Rename" Command="{Binding RenameCustomCursorSetCommand}" FontWeight="Medium" />
                                             </Grid>
 

@@ -1,4 +1,4 @@
-﻿<ui:UiPage
+<ui:UiPage
     x:Class="Voidstrap.UI.Elements.About.Pages.AboutPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -49,7 +49,7 @@
                 Height="72"
                 VerticalAlignment="Center"
                 RenderOptions.BitmapScalingMode="HighQuality"
-                Source="pack://application:,,,/Voidstrap.ico" />
+                Source="pack://application:,,,/Bloodstrap.ico" />
             <Image
                 x:Name="Image2"
                 Grid.Column="0"
@@ -74,7 +74,7 @@
                         Margin="0,0,4,0"
                         FontSize="24"
                         FontWeight="Medium"
-                        Text="Voidstrap" />
+                        Text="Bloodstrap" />
 
                 </Grid>
                 <TextBlock Text="A Bloxstrap Fork." />

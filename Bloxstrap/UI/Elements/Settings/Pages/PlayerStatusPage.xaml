@@ -1,0 +1,211 @@
+<ui:UiPage
+    x:Class="Voidstrap.UI.Elements.Settings.Pages.PlayerStatusPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:controls="clr-namespace:Voidstrap.UI.Elements.Controls"
+    Title="Player Status"
+    Scrollable="True"
+    d:DesignHeight="800"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <StackPanel Margin="0,0,0,16">
+        <!-- Page Header -->
+        <TextBlock FontSize="28" FontWeight="Bold" Text="Player Status &amp; Inventory" Margin="0,0,0,8"/>
+        <TextBlock FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Margin="0,0,0,24">
+            View your currently logged-in Roblox account information, badges, items, and gamepasses.
+        </TextBlock>
+
+        <!-- Account Info Card -->
+        <ui:CardControl Icon="Person24" Header="Current Account" Margin="0,0,0,16">
+            <StackPanel>
+                <Grid Margin="0,8,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Username -->
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Username:" FontWeight="SemiBold" Margin="0,0,16,8"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" x:Name="UsernameText" Text="Not logged in" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,8"/>
+
+                    <!-- User ID -->
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="User ID:" FontWeight="SemiBold" Margin="0,0,16,8"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="UserIdText" Text="-" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,8"/>
+
+                    <!-- Account Age -->
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Account Age:" FontWeight="SemiBold" Margin="0,0,16,8"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" x:Name="AccountAgeText" Text="-" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,8"/>
+
+                    <!-- Premium Status -->
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Premium:" FontWeight="SemiBold" Margin="0,0,16,8"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" x:Name="PremiumText" Text="-" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,8"/>
+                </Grid>
+
+                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                    <ui:Button Content="Refresh Account Info" 
+                              Icon="ArrowSync24" 
+                              Margin="0,0,8,0"
+                              Click="RefreshAccount_Click"/>
+                    <ui:Button Content="Login via Web" 
+                              Icon="Globe24" 
+                              Appearance="Primary"
+                              Click="LoginWeb_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </ui:CardControl>
+
+        <!-- Quick Actions -->
+        <ui:CardExpander Margin="0,0,0,16" IsExpanded="True">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="14" Text="Quick Actions" />
+                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="Open your Roblox inventory in separate windows" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+
+            <StackPanel>
+                <controls:OptionControl Header="Badges" 
+                                       Description="View all your Roblox badges">
+                    <ui:Button Content="Open Badges" 
+                              Icon="Trophy24"
+                              Click="OpenBadges_Click"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Inventory" 
+                                       Description="View your items and collectibles">
+                    <ui:Button Content="Open Inventory" 
+                              Icon="Box24"
+                              Click="OpenInventory_Click"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Game Passes" 
+                                       Description="View all your owned game passes">
+                    <ui:Button Content="Open Passes" 
+                              Icon="Apps24"
+                              Click="OpenGamePasses_Click"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Profile" 
+                                       Description="Open your Roblox profile page">
+                    <ui:Button Content="Open Profile" 
+                              Icon="Person24"
+                              Click="OpenProfile_Click"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Friends" 
+                                       Description="View your friends list">
+                    <ui:Button Content="Open Friends" 
+                              Icon="People24"
+                              Click="OpenFriends_Click"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Groups" 
+                                       Description="View your groups">
+                    <ui:Button Content="Open Groups" 
+                              Icon="PeopleTeam24"
+                              Click="OpenGroups_Click"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Transactions" 
+                                       Description="View your Robux transactions">
+                    <ui:Button Content="Open Transactions" 
+                              Icon="Money24"
+                              Click="OpenTransactions_Click"/>
+                </controls:OptionControl>
+            </StackPanel>
+        </ui:CardExpander>
+
+        <!-- Statistics Card -->
+        <ui:CardExpander Margin="0,0,0,16" IsExpanded="False">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="14" Text="Account Statistics" />
+                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="Your Roblox account stats" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+
+            <StackPanel>
+                <Grid Margin="0,8,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Friends Count -->
+                    <Border Grid.Row="0" Grid.Column="0" Background="{DynamicResource ControlFillColorDefaultBrush}" 
+                           CornerRadius="8" Padding="16" Margin="0,0,8,8">
+                        <StackPanel>
+                            <TextBlock Text="Friends" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                            <TextBlock x:Name="FriendsCountText" Text="0" FontSize="24" FontWeight="Bold" Margin="0,4,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Followers Count -->
+                    <Border Grid.Row="0" Grid.Column="1" Background="{DynamicResource ControlFillColorDefaultBrush}" 
+                           CornerRadius="8" Padding="16" Margin="8,0,0,8">
+                        <StackPanel>
+                            <TextBlock Text="Followers" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                            <TextBlock x:Name="FollowersCountText" Text="0" FontSize="24" FontWeight="Bold" Margin="0,4,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Following Count -->
+                    <Border Grid.Row="1" Grid.Column="0" Background="{DynamicResource ControlFillColorDefaultBrush}" 
+                           CornerRadius="8" Padding="16" Margin="0,0,8,8">
+                        <StackPanel>
+                            <TextBlock Text="Following" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                            <TextBlock x:Name="FollowingCountText" Text="0" FontSize="24" FontWeight="Bold" Margin="0,4,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Groups Count -->
+                    <Border Grid.Row="1" Grid.Column="1" Background="{DynamicResource ControlFillColorDefaultBrush}" 
+                           CornerRadius="8" Padding="16" Margin="8,0,0,8">
+                        <StackPanel>
+                            <TextBlock Text="Groups" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                            <TextBlock x:Name="GroupsCountText" Text="0" FontSize="24" FontWeight="Bold" Margin="0,4,0,0"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <ui:Button Content="Refresh Statistics" 
+                          Icon="ArrowSync24" 
+                          Margin="0,8,0,0"
+                          Click="RefreshStats_Click"/>
+            </StackPanel>
+        </ui:CardExpander>
+
+        <!-- Status Indicator -->
+        <Border Background="{DynamicResource ControlFillColorDefaultBrush}" 
+               CornerRadius="8" 
+               Padding="12" 
+               Margin="0,0,0,0">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                    <ui:SymbolIcon x:Name="StatusIcon" Symbol="Info24" FontSize="16" Foreground="#FFA500" Margin="0,0,8,0"/>
+                    <TextBlock Text="Status" FontWeight="SemiBold" FontSize="13"/>
+                </StackPanel>
+                <TextBlock x:Name="StatusText" 
+                          Text="Click 'Refresh Account Info' to load your account details" 
+                          FontSize="12" 
+                          TextWrapping="Wrap"
+                          Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</ui:UiPage>

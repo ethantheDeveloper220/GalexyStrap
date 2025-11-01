@@ -20,22 +20,19 @@ namespace Voidstrap
     /// </summary>
     public partial class App : Application
     {
-#if QA_BUILD
-        public const string ProjectName = "Voidstrap-QA";
-#else
-        public const string ProjectName = "Voidstrap";
-#endif
-        public const string ProjectOwner = "Voidstrap";
-        public const string ProjectRepository = "/voidstrap/Voidstrap/";
-        public const string ProjectDownloadLink = "https://github.com/voidstrap/Voidstrap/releases";
-        public const string ProjectHelpLink = "https://github.com/BloxstrapLabs/Bloxstrap/wiki";
-        public const string ProjectSupportLink = "https://github.com/voidstrap/Voidstrap/issues/new";
+        // Use centralized project info from ProjectInfo.cs
+        public static string ProjectName => ProjectInfo.PROJECT_NAME;
+        public static string ProjectRepository => ProjectInfo.FullRepository;
+        public static string ProjectOwner => ProjectInfo.PROJECT_OWNER;
+        public static string ProjectDownloadLink => ProjectInfo.DownloadLink;
+        public static string ProjectHelpLink => ProjectInfo.HelpLink;
+        public static string ProjectSupportLink => ProjectInfo.SupportLink;
 
         public const string RobloxPlayerAppName = "RobloxPlayerBeta";
         public const string RobloxStudioAppName = "RobloxStudioBeta";
-        public const string UninstallKey = $@"Software\Microsoft\Windows\CurrentVersion\Uninstall\{ProjectName}";
+        public static string UninstallKey => ProjectInfo.UninstallKey;
 
-        public const string ApisKey = $"Software\\{ProjectName}";
+        public static string ApisKey => ProjectInfo.RegistryKey;
 
         public static LaunchSettings LaunchSettings { get; private set; } = null!;
 
@@ -186,7 +183,7 @@ namespace Voidstrap
                 Logger.WriteLine(LOG_IDENT, $"Detected unsupported Windows version ({Environment.OSVersion.Version}).");
 
                 if (!LaunchSettings.QuietFlag.Active)
-                    Frontend.ShowMessageBox("Your Windows Version is not supported with Voidstrap!", MessageBoxImage.Error);
+                    Frontend.ShowMessageBox("Your Windows Version is not supported with Bloodstrap!", MessageBoxImage.Error);
 
                 Terminate(ErrorCode.ERROR_INVALID_FUNCTION);
             }

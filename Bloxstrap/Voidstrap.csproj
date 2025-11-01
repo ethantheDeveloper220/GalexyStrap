@@ -6,9 +6,10 @@
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
 		<UseWindowsForms>True</UseWindowsForms>
-		<ApplicationIcon>Voidstrap.ico</ApplicationIcon>
-		<Version>0.0.5</Version>
-		<FileVersion>0.0.5</FileVersion>
+		<ApplicationIcon>Bloodstrap.ico</ApplicationIcon>
+		<AssemblyName>Bloodstrap</AssemblyName>
+		<Version>1.3.0</Version>
+		<FileVersion>1.3.0</FileVersion>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<RootNamespace>Voidstrap</RootNamespace>
@@ -71,7 +72,7 @@
 		<Resource Include="UI\Elements\Settings\Pages\Icon (1).png" />
 		<Resource Include="UI\Elements\Settings\Pages\klikos-mod-thumbnail.png" />
 		<Resource Include="UI\Elements\Settings\Pages\RobloxBB.png" />
-		<Resource Include="Voidstrap.ico" />
+		<Resource Include="Bloodstrap.ico" />
 		<Resource Include="Resources\Checkmark.ico" />
 		<Resource Include="Resources\CrossMark.ico" />
 		<Resource Include="Resources\Fonts\NotoSansThai-VariableFont_wdth,wght.ttf" />
@@ -107,7 +108,7 @@
 		<EmbeddedResource Include="Resources\Icon2017.ico" />
 		<EmbeddedResource Include="Resources\Icon2019.ico" />
 		<EmbeddedResource Include="Resources\Icon2022.ico" />
-		<EmbeddedResource Include="Resources\IconVoidstrap.ico" />
+		<EmbeddedResource Include="Resources\IconBloodstrap.ico" />
 		<EmbeddedResource Include="Resources\IconHellstrapClassic2.ico" />
 		<EmbeddedResource Include="Resources\IconEarly2015.ico" />
 		<EmbeddedResource Include="Resources\IconLate2015.ico" />

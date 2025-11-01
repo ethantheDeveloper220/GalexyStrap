@@ -1,4 +1,4 @@
-﻿using System.Collections.Concurrent;
+using System.Collections.Concurrent;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
@@ -198,7 +198,7 @@ namespace Voidstrap.RobloxInterfaces
                 string versionHash = clientInfo.VersionGuid["version-".Length..];
                 string version = clientInfo.Version;
 
-                string tmp = Path.Combine(Path.GetTempPath(), "Voidstrap");
+                string tmp = Path.Combine(Path.GetTempPath(), "Bloodstrap");
                 Directory.CreateDirectory(tmp);
 
                 string luaPackagesUrl = $"https://setup.rbxcdn.com/version-{versionHash}-extracontent-luapackages.zip";

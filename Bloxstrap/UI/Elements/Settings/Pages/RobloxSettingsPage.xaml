@@ -21,6 +21,7 @@
             <ui:TextBox Margin="0,0,5,4"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"
+                    Icon="Edit24"
                     Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </DataTemplate>
 
@@ -80,6 +81,7 @@
                         ClearButtonEnabled="False"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
+                        Icon="NumberSymbol24"
                         Text="{Binding VectorX, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         PreviewTextInput="ValidateFloat" />
 
@@ -88,6 +90,7 @@
                         ClearButtonEnabled="False"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
+                        Icon="NumberSymbol24"
                         Text="{Binding VectorY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         PreviewTextInput="ValidateFloat" />
             </Grid>

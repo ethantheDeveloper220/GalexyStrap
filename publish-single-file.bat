@@ -9,7 +9,7 @@ echo.
 
 cd Bloxstrap
 
-dotnet publish -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true /p:EnableCompressionInSingleFile=true
+dotnet publish Voidstrap.csproj -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true /p:EnableCompressionInSingleFile=true
 
 if %ERRORLEVEL% EQU 0 (
     echo.

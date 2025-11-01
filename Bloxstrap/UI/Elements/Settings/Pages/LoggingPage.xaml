@@ -1,0 +1,118 @@
+<ui:UiPage
+    x:Class="Voidstrap.UI.Elements.Settings.Pages.LoggingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:controls="clr-namespace:Voidstrap.UI.Elements.Controls"
+    Title="Logging &amp; Debugging"
+    Scrollable="False"
+    d:DesignHeight="800"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <StackPanel Margin="0,0,14,14">
+        <!-- Header -->
+        <TextBlock
+            FontSize="20"
+            FontWeight="Medium"
+            Text="Logging &amp; Debugging" />
+        <TextBlock
+            Margin="0,4,0,0"
+            FontSize="13"
+            Foreground="{StaticResource TextFillColorSecondaryBrush}"
+            Text="Access activity logs and debugging tools for Bloodstrap."
+            TextWrapping="Wrap" />
+
+        <!-- Activity Logger -->
+        <TextBlock
+            Margin="0,24,0,0"
+            FontSize="16"
+            FontWeight="Medium"
+            Text="Activity Logger" />
+
+        <ui:CardControl
+            Margin="0,8,0,0"
+            Icon="Document24">
+            <ui:CardControl.Header>
+                <StackPanel>
+                    <TextBlock FontWeight="Medium" Text="Open Activity Logger" />
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="View real-time activity logs in a separate window"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+            </ui:CardControl.Header>
+            <ui:Button
+                Content="Open Logger"
+                Icon="Window24"
+                Click="OpenActivityLogger_Click" />
+        </ui:CardControl>
+
+        <!-- Logs Folder -->
+        <TextBlock
+            Margin="0,24,0,0"
+            FontSize="16"
+            FontWeight="Medium"
+            Text="Log Files" />
+
+        <ui:CardControl
+            Margin="0,8,0,0"
+            Icon="Folder24">
+            <ui:CardControl.Header>
+                <StackPanel>
+                    <TextBlock FontWeight="Medium" Text="Open Logs Folder" />
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="Access saved log files from Bloodstrap"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+            </ui:CardControl.Header>
+            <ui:Button
+                Content="Open Folder"
+                Icon="FolderOpen24"
+                Click="OpenLogsFolder_Click" />
+        </ui:CardControl>
+
+        <!-- Debug Info -->
+        <TextBlock
+            Margin="0,24,0,0"
+            FontSize="16"
+            FontWeight="Medium"
+            Text="Debug Information" />
+
+        <ui:CardExpander
+            Margin="0,8,0,0"
+            Icon="Info24"
+            Header="System Information">
+            <ui:CardExpander.Content>
+                <StackPanel Margin="16">
+                    <TextBlock Text="Version Information" FontWeight="Medium" Margin="0,0,0,8" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Bloodstrap Version:" Margin="0,0,0,4" />
+                        <TextBlock Grid.Row="0" Grid.Column="1" x:Name="VersionText" Text="1.3.0" Margin="0,0,0,4" FontFamily="Consolas" />
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text=".NET Version:" Margin="0,0,0,4" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="DotNetVersionText" Text=".NET 8.0" Margin="0,0,0,4" FontFamily="Consolas" />
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="OS Version:" Margin="0,0,0,4" />
+                        <TextBlock Grid.Row="2" Grid.Column="1" x:Name="OSVersionText" Text="Windows" Margin="0,0,0,4" FontFamily="Consolas" />
+                    </Grid>
+                </StackPanel>
+            </ui:CardExpander.Content>
+        </ui:CardExpander>
+    </StackPanel>
+</ui:UiPage>

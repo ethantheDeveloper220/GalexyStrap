@@ -1,4 +1,4 @@
-﻿namespace Voidstrap
+namespace Voidstrap
 {
     static class Paths
     {
@@ -16,7 +16,7 @@
         public static string Cache { get; private set; } = "";
         public static string RobloxLogs { get; private set; } = "";
         public static string RobloxCache { get; private set; } = "";
-        public static string RobloxBase { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Voidstrap");
+        public static string RobloxBase { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Bloodstrap");
         public static string Base { get; private set; } = "";
         public static string Downloads { get; private set; } = "";
         public static string SavedBackups { get; private set; } = "";

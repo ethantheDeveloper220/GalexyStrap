@@ -1,0 +1,269 @@
+<ui:UiPage
+    x:Class="Voidstrap.UI.Elements.Settings.Pages.NotificationsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:controls="clr-namespace:Voidstrap.UI.Elements.Controls"
+    xmlns:models="clr-namespace:Voidstrap.UI.ViewModels.Settings"
+    Title="Notifications"
+    Scrollable="True"
+    d:DataContext="{d:DesignInstance Type=models:NotificationsViewModel}"
+    d:DesignHeight="800"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <StackPanel Margin="0,0,14,14">
+        <!-- Header -->
+        <TextBlock
+            FontSize="20"
+            FontWeight="Medium"
+            Text="Notification Settings" />
+        <TextBlock
+            Margin="0,2,0,0"
+            FontSize="13"
+            Foreground="{StaticResource TextFillColorSecondaryBrush}"
+            Text="Configure how Bloodstrap notifies you about events and updates."
+            TextWrapping="Wrap" />
+
+        <!-- Notification Type Selection -->
+        <TextBlock
+            Margin="0,24,0,0"
+            FontSize="16"
+            FontWeight="Medium"
+            Text="Notification Type" />
+
+        <ui:CardExpander
+            Margin="0,8,0,0"
+            Icon="Alert24"
+            Header="Notification Method">
+            <ui:CardExpander.Content>
+                <StackPanel Margin="16">
+                    <!-- Tray Tip Option -->
+                    <ui:CardControl
+                        Margin="0,0,0,8"
+                        Icon="Info24">
+                        <ui:CardControl.Header>
+                            <StackPanel>
+                                <TextBlock FontWeight="Medium" Text="Tray Tip Notifications" />
+                                <TextBlock
+                                    FontSize="12"
+                                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                    Text="Show notifications in the system tray (bottom-right corner)"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+                        </ui:CardControl.Header>
+                        <ui:ToggleSwitch IsChecked="{Binding UseTrayTip, Mode=TwoWay}" />
+                    </ui:CardControl>
+
+                    <!-- Message Box Option -->
+                    <ui:CardControl
+                        Margin="0,0,0,8"
+                        Icon="ChatBubblesQuestion24">
+                        <ui:CardControl.Header>
+                            <StackPanel>
+                                <TextBlock FontWeight="Medium" Text="Message Box Notifications" />
+                                <TextBlock
+                                    FontSize="12"
+                                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                    Text="Show notifications as popup dialog boxes (more intrusive)"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+                        </ui:CardControl.Header>
+                        <ui:ToggleSwitch IsChecked="{Binding UseMessageBox, Mode=TwoWay}" />
+                    </ui:CardControl>
+
+                    <!-- Both Option Info -->
+                    <ui:InfoBar
+                        Margin="0,8,0,0"
+                        Title="Tip"
+                        Message="You can enable both notification types if you want redundancy. Tray tips are less intrusive and recommended for most users."
+                        IsOpen="True"
+                        IsClosable="False"
+                        Severity="Informational" />
+                </StackPanel>
+            </ui:CardExpander.Content>
+        </ui:CardExpander>
+
+        <!-- Notification Events -->
+        <TextBlock
+            Margin="0,24,0,0"
+            FontSize="16"
+            FontWeight="Medium"
+            Text="Notification Events" />
+
+        <!-- Roblox Events -->
+        <ui:CardExpander
+            Margin="0,8,0,0"
+            Icon="Games24"
+            Header="Roblox Events">
+            <ui:CardExpander.Content>
+                <StackPanel Margin="16">
+                    <ui:CardControl Icon="Play24">
+                        <ui:CardControl.Header>
+                            <StackPanel>
+                                <TextBlock FontWeight="Medium" Text="Game Launch" />
+                                <TextBlock
+                                    FontSize="12"
+                                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                    Text="Notify when Roblox launches successfully" />
+                            </StackPanel>
+                        </ui:CardControl.Header>
+                        <ui:ToggleSwitch IsChecked="{Binding NotifyOnGameLaunch, Mode=TwoWay}" />
+                    </ui:CardControl>
+
+                    <ui:CardControl Margin="0,8,0,0" Icon="Dismiss24">
+                        <ui:CardControl.Header>
+                            <StackPanel>
+                                <TextBlock FontWeight="Medium" Text="Game Close" />
+                                <TextBlock
+                                    FontSize="12"
+                                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                    Text="Notify when Roblox closes" />
+                            </StackPanel>
+                        </ui:CardControl.Header>
+                        <ui:ToggleSwitch IsChecked="{Binding NotifyOnGameClose, Mode=TwoWay}" />
+                    </ui:CardControl>
+
+                    <ui:CardControl Margin="0,8,0,0" Icon="ArrowDownload24">
+                        <ui:CardControl.Header>
+                            <StackPanel>
+                                <TextBlock FontWeight="Medium" Text="Update Downloaded" />
+                                <TextBlock
+                                    FontSize="12"
+                                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                    Text="Notify when Roblox updates are downloaded" />
+                            </StackPanel>
+                        </ui:CardControl.Header>
+                        <ui:ToggleSwitch IsChecked="{Binding NotifyOnUpdate, Mode=TwoWay}" />
+                    </ui:CardControl>
+                </StackPanel>
+            </ui:CardExpander.Content>
+        </ui:CardExpander>
+
+        <!-- Bloodstrap Events -->
+        <ui:CardExpander
+            Margin="0,8,0,0"
+            Icon="Alert24"
+            Header="Bloodstrap Events">
+            <ui:CardExpander.Content>
+                <StackPanel Margin="16">
+                    <ui:CardControl Icon="Checkmark24">
+                        <ui:CardControl.Header>
+                            <StackPanel>
+                                <TextBlock FontWeight="Medium" Text="Settings Saved" />
+                                <TextBlock
+                                    FontSize="12"
+                                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                    Text="Notify when settings are successfully saved" />
+                            </StackPanel>
+                        </ui:CardControl.Header>
+                        <ui:ToggleSwitch IsChecked="{Binding NotifyOnSettingsSaved, Mode=TwoWay}" />
+                    </ui:CardControl>
+
+                    <ui:CardControl Margin="0,8,0,0" Icon="Warning24">
+                        <ui:CardControl.Header>
+                            <StackPanel>
+                                <TextBlock FontWeight="Medium" Text="Errors &amp; Warnings" />
+                                <TextBlock
+                                    FontSize="12"
+                                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                    Text="Notify when errors or warnings occur" />
+                            </StackPanel>
+                        </ui:CardControl.Header>
+                        <ui:ToggleSwitch IsChecked="{Binding NotifyOnErrors, Mode=TwoWay}" />
+                    </ui:CardControl>
+
+                    <ui:CardControl Margin="0,8,0,0" Icon="ArrowSync24">
+                        <ui:CardControl.Header>
+                            <StackPanel>
+                                <TextBlock FontWeight="Medium" Text="Bloodstrap Updates" />
+                                <TextBlock
+                                    FontSize="12"
+                                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                    Text="Notify when Bloodstrap updates are available" />
+                            </StackPanel>
+                        </ui:CardControl.Header>
+                        <ui:ToggleSwitch IsChecked="{Binding NotifyOnBloodstrapUpdate, Mode=TwoWay}" />
+                    </ui:CardControl>
+                </StackPanel>
+            </ui:CardExpander.Content>
+        </ui:CardExpander>
+
+        <!-- Notification Settings -->
+        <TextBlock
+            Margin="0,24,0,0"
+            FontSize="16"
+            FontWeight="Medium"
+            Text="Notification Behavior" />
+
+        <ui:CardControl
+            Margin="0,8,0,0"
+            Icon="Timer24">
+            <ui:CardControl.Header>
+                <StackPanel>
+                    <TextBlock FontWeight="Medium" Text="Tray Tip Duration" />
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="How long tray tip notifications should stay visible (in seconds)" />
+                </StackPanel>
+            </ui:CardControl.Header>
+            <ui:NumberBox
+                Width="120"
+                Min="1"
+                Max="30"
+                Icon="Clock24"
+                Value="{Binding TrayTipDuration, Mode=TwoWay}" />
+        </ui:CardControl>
+
+        <ui:CardControl
+            Margin="0,8,0,0"
+            Icon="Speaker224">
+            <ui:CardControl.Header>
+                <StackPanel>
+                    <TextBlock FontWeight="Medium" Text="Play Sound" />
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="Play a sound when notifications appear" />
+                </StackPanel>
+            </ui:CardControl.Header>
+            <ui:ToggleSwitch IsChecked="{Binding PlayNotificationSound, Mode=TwoWay}" />
+        </ui:CardControl>
+
+        <!-- Test Notifications -->
+        <TextBlock
+            Margin="0,24,0,0"
+            FontSize="16"
+            FontWeight="Medium"
+            Text="Test Notifications" />
+
+        <ui:CardExpander
+            Margin="0,8,0,0"
+            Icon="Beaker24"
+            Header="Test Your Settings">
+            <ui:CardExpander.Content>
+                <StackPanel Margin="16">
+                    <ui:Button
+                        Content="Send Test Tray Tip"
+                        Icon="Info24"
+                        Command="{Binding TestTrayTipCommand}"
+                        Margin="0,0,0,8" />
+                    <ui:Button
+                        Content="Send Test Message Box"
+                        Icon="ChatBubblesQuestion24"
+                        Command="{Binding TestMessageBoxCommand}"
+                        Margin="0,0,0,8" />
+                    <ui:Button
+                        Content="Send Test Error Notification"
+                        Icon="Warning24"
+                        Appearance="Caution"
+                        Command="{Binding TestErrorCommand}" />
+                </StackPanel>
+            </ui:CardExpander.Content>
+        </ui:CardExpander>
+
+    </StackPanel>
+</ui:UiPage>

@@ -1,4 +1,4 @@
-﻿<ui:UiPage
+<ui:UiPage
     x:Class="Voidstrap.UI.Elements.Settings.Pages.ShortcutsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -124,6 +124,7 @@
                     <TextBlock Text="Game ID"
                        Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
                     <ui:TextBox Margin="0,4,0,0"
+                        Icon="Games24"
                         PlaceholderText="Enter Game ID (e.g., 1818)"
                         Text="{Binding GameID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
@@ -133,6 +134,7 @@
                     <TextBlock Text="Instance ID (Optional)"
                        Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
                     <ui:TextBox Margin="0,4,0,0"
+                        Icon="Server24"
                         PlaceholderText="Enter Instance ID"
                         Text="{Binding GameInstanceId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
@@ -142,6 +144,7 @@
                     <TextBlock Text="Private Server Access Code"
                        Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
                     <ui:TextBox Margin="0,4,0,0"
+                        Icon="Key24"
                         PlaceholderText="Enter Private Server Code"
                         Text="{Binding PrivateServerCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>

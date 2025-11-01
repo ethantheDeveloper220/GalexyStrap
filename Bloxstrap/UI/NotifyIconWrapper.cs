@@ -28,8 +28,8 @@ namespace Voidstrap.UI
 
             _notifyIcon = new NotifyIcon(new System.ComponentModel.Container())
             {
-                Icon = Properties.Resources.IconVoidstrap,
-                Text = "Voidstrap",
+                Icon = Properties.Resources.IconBloodstrap,
+                Text = "Bloodstrap",
                 Visible = true
             };
             _notifyIcon.MouseClick += NotifyIcon_MouseClick;

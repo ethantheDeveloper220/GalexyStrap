@@ -1,0 +1,241 @@
+<base:WpfUiWindow x:Class="Voidstrap.UI.Elements.Dialogs.EnhancedPresetManagerDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:local="clr-namespace:Voidstrap.UI.Elements.Dialogs"
+        xmlns:base="clr-namespace:Voidstrap.UI.Elements.Base"
+        xmlns:resources="clr-namespace:Voidstrap.Resources"
+        mc:Ignorable="d"
+        Title="Enhanced Preset Manager" 
+        MinHeight="400"
+        MaxHeight="650"
+        Width="700"
+        SizeToContent="Height"
+        ResizeMode="NoResize"
+        Background="{ui:ThemeResource ApplicationBackgroundBrush}"
+        ExtendsContentIntoTitleBar="True"
+        WindowBackdropType="Mica"
+        WindowStartupLocation="CenterScreen">
+    
+    <Grid>
+        <Grid.Background>
+            <DynamicResource ResourceKey="WindowBackgroundGradient" />
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="ImageBackgroundLayer" Panel.ZIndex="-1" Grid.RowSpan="3">
+            <Border Background="{DynamicResource WindowBackgroundImage}" />
+            <Border Background="{DynamicResource WindowBackgroundBlackOverlay}" />
+        </Grid>
+
+        <ui:TitleBar Grid.Row="0" Padding="8" Title="Enhanced FastFlag Preset Manager" ShowMinimize="False" ShowMaximize="False" CanMaximize="False" />
+
+        <TabControl x:Name="Tabs" Grid.Row="1" Margin="16">
+            <!-- Save Preset Tab -->
+            <TabItem Header="💾 Save Preset" FontWeight="Medium">
+                <Grid Margin="11,20,11,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Grid.Row="0" Text="Save your current FastFlags as a custom preset" FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,12" />
+                    
+                    <ui:TextBox Grid.Row="1" x:Name="SavePresetName" PlaceholderText="Preset Name (e.g., My Ultra Performance)" FontWeight="Medium" Margin="0,0,0,12" />
+                    
+                    <ui:TextBox Grid.Row="2" x:Name="SavePresetDescription" PlaceholderText="Description (optional)" TextWrapping="Wrap" MinHeight="60" Margin="0,0,0,12" />
+                    
+                    <StackPanel Grid.Row="3" Orientation="Horizontal">
+                        <CheckBox x:Name="SaveWithTimestamp" Content="Add timestamp to filename" Margin="0,0,16,0" IsChecked="True" />
+                        <CheckBox x:Name="SaveCompressed" Content="Compress JSON" />
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- Load Preset Tab -->
+            <TabItem Header="📂 Load Preset" FontWeight="Medium">
+                <Grid Margin="11">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Grid.Row="0" Text="Load a saved preset from your PC" FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,12" />
+                    
+                    <ListBox x:Name="LoadPresetList" Grid.Row="1" SelectionChanged="LoadPresetList_SelectionChanged" BorderThickness="1" Background="{DynamicResource NormalDarkAndLightBackground}" Padding="4" MinHeight="150" />
+                    
+                    <Grid Grid.Row="2" Margin="0,12,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                            <ui:Button Content="Browse..." Icon="FolderOpen24" Click="BrowsePreset_Click" Margin="0,0,8,0" />
+                            <ui:Button Content="Refresh List" Icon="ArrowSync24" Click="RefreshPresets_Click" />
+                        </StackPanel>
+                        <CheckBox Grid.Column="1" x:Name="MergePreset" Content="Merge with existing flags" IsChecked="False" VerticalAlignment="Center" />
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <!-- Import/Export Tab -->
+            <TabItem Header="🔄 Import/Export" FontWeight="Medium">
+                <Grid Margin="11,20,11,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Grid.Row="0" Text="Import from URL or Export to share" FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,16" />
+                    
+                    <TextBlock Grid.Row="1" Text="Import from URL:" FontWeight="Medium" Margin="0,0,0,8" />
+                    <Grid Grid.Row="2" Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ui:TextBox Grid.Column="0" x:Name="ImportUrl" PlaceholderText="https://example.com/preset.json" Margin="0,0,8,0" />
+                        <ui:Button Grid.Column="1" Content="Import" Icon="ArrowDownload24" Click="ImportFromUrl_Click" />
+                    </Grid>
+                    
+                    <TextBlock Grid.Row="3" Text="Export Options:" FontWeight="Medium" Margin="0,0,0,8" />
+                    <WrapPanel Grid.Row="4" Orientation="Horizontal">
+                        <ui:Button Content="Export to File" Icon="DocumentSave24" Click="ExportToFile_Click" Margin="0,0,8,8" />
+                        <ui:Button Content="Copy to Clipboard" Icon="Clipboard24" Click="CopyToClipboard_Click" Margin="0,0,8,8" />
+                        <ui:Button Content="Generate Share Link" Icon="Share24" Click="GenerateShareLink_Click" Margin="0,0,8,8" />
+                    </WrapPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- Bulk Operations Tab -->
+            <TabItem Header="⚡ Bulk Operations" FontWeight="Medium">
+                <Grid Margin="11,20,11,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Grid.Row="0" Text="Perform bulk operations on FastFlags" FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,16" />
+                    
+                    <TextBlock Grid.Row="1" Text="Bulk Find &amp; Replace:" FontWeight="Medium" Margin="0,0,0,8" />
+                    <Grid Grid.Row="2" Margin="0,0,0,16">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <ui:TextBox Grid.Row="0" Grid.Column="0" x:Name="BulkFindText" PlaceholderText="Find text" Margin="0,0,4,8" />
+                        <ui:TextBox Grid.Row="0" Grid.Column="1" x:Name="BulkReplaceText" PlaceholderText="Replace with" Margin="4,0,0,8" />
+                        
+                        <CheckBox Grid.Row="1" Grid.ColumnSpan="2" x:Name="BulkCaseSensitive" Content="Case sensitive" Margin="0,0,0,8" />
+                        
+                        <ui:Button Grid.Row="2" Grid.ColumnSpan="2" Content="Apply Bulk Replace" Icon="ArrowSwap24" Click="ApplyBulkReplace_Click" HorizontalAlignment="Stretch" />
+                    </Grid>
+                    
+                    <WrapPanel Grid.Row="3" Orientation="Horizontal">
+                        <ui:Button Content="Enable All Flags" Icon="CheckmarkCircle24" Click="EnableAllFlags_Click" Margin="0,0,8,8" />
+                        <ui:Button Content="Disable All Flags" Icon="DismissCircle24" Click="DisableAllFlags_Click" Margin="0,0,8,8" />
+                        <ui:Button Content="Reset to Defaults" Icon="ArrowReset24" Click="ResetToDefaults_Click" Margin="0,0,8,8" />
+                    </WrapPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- Preset Library Tab -->
+            <TabItem Header="📚 Preset Library" FontWeight="Medium">
+                <Grid Margin="11">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Grid.Row="0" Text="Built-in performance presets" FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,12" />
+                    
+                    <ListBox x:Name="PresetLibraryList" Grid.Row="1" BorderThickness="1" Background="{DynamicResource NormalDarkAndLightBackground}" Padding="4" MinHeight="150">
+                        <ListBoxItem>
+                            <StackPanel>
+                                <TextBlock Text="🚀 High Quality" FontWeight="Bold" FontSize="14" />
+                                <TextBlock Text="Maximum graphics quality with MSAA 4x" Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <StackPanel>
+                                <TextBlock Text="⚖️ Balanced Quality" FontWeight="Bold" FontSize="14" />
+                                <TextBlock Text="Good balance between quality and performance" Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <StackPanel>
+                                <TextBlock Text="⚡ Low Quality" FontWeight="Bold" FontSize="14" />
+                                <TextBlock Text="Maximum performance, minimal graphics" Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <StackPanel>
+                                <TextBlock Text="🥔 Ultimate Potato Mode" FontWeight="Bold" FontSize="14" />
+                                <TextBlock Text="Extreme performance optimization for low-end PCs" Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12" />
+                            </StackPanel>
+                        </ListBoxItem>
+                    </ListBox>
+                    
+                    <ui:Button Grid.Row="2" Content="Apply Selected Preset" Icon="Play24" Click="ApplyLibraryPreset_Click" Margin="0,12,0,0" HorizontalAlignment="Stretch" />
+                </Grid>
+            </TabItem>
+
+            <!-- Advanced Tools Tab -->
+            <TabItem Header="🔧 Advanced Tools" FontWeight="Medium">
+                <Grid Margin="11,20,11,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Grid.Row="0" Text="Advanced FastFlag management tools" FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,16" />
+                    
+                    <TextBlock Grid.Row="1" Text="Validation &amp; Cleanup:" FontWeight="Medium" Margin="0,0,0,8" />
+                    <WrapPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,16">
+                        <ui:Button Content="Validate All Flags" Icon="Checkmark24" Click="ValidateFlags_Click" Margin="0,0,8,8" />
+                        <ui:Button Content="Remove Duplicates" Icon="Delete24" Click="RemoveDuplicates_Click" Margin="0,0,8,8" />
+                        <ui:Button Content="Sort Alphabetically" Icon="TextSortAscending24" Click="SortAlphabetically_Click" Margin="0,0,8,8" />
+                        <ui:Button Content="Remove Invalid" Icon="Warning24" Click="RemoveInvalid_Click" Margin="0,0,8,8" />
+                    </WrapPanel>
+                    
+                    <TextBlock Grid.Row="3" Text="Comparison &amp; Analysis:" FontWeight="Medium" Margin="0,0,0,8" />
+                    <WrapPanel Grid.Row="4" Orientation="Horizontal">
+                        <ui:Button Content="Compare Presets" Icon="DocumentOnePage24" Click="ComparePresets_Click" Margin="0,0,8,8" />
+                        <ui:Button Content="Show Statistics" Icon="DataPie24" Click="ShowStatistics_Click" Margin="0,0,8,8" />
+                        <ui:Button Content="Backup Current" Icon="Archive24" Click="BackupCurrent_Click" Margin="0,0,8,8" />
+                    </WrapPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <Border Grid.Row="2" Margin="0,10,0,0" Padding="15" Background="{DynamicResource PrimaryBackgroundColor}">
+            <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" HorizontalAlignment="Right">
+                <Button MinWidth="100" Content="Apply" Click="ApplyButton_Click" FontWeight="Medium" Margin="0,0,12,0" />
+                <Button MinWidth="100" Content="Close" IsCancel="True" FontWeight="Medium" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</base:WpfUiWindow>

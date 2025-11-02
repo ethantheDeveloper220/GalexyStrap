@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Collections.ObjectModel;
@@ -719,6 +719,31 @@ namespace Voidstrap.UI.Elements.Settings.Pages
 
 
         private void DeleteAllButton_Click(object sender, RoutedEventArgs e) => ShowDeleteAllFlagsConfirmation();
+
+        private void FilterGraphics_Click(object sender, RoutedEventArgs e)
+        {
+            SearchTextBox.Text = "Render";
+        }
+
+        private void FilterNetwork_Click(object sender, RoutedEventArgs e)
+        {
+            SearchTextBox.Text = "Network";
+        }
+
+        private void FilterPerformance_Click(object sender, RoutedEventArgs e)
+        {
+            SearchTextBox.Text = "Performance";
+        }
+
+        private void FilterDebug_Click(object sender, RoutedEventArgs e)
+        {
+            SearchTextBox.Text = "Debug";
+        }
+
+        private void ClearFilter_Click(object sender, RoutedEventArgs e)
+        {
+            SearchTextBox.Text = "";
+        }
 
         private CancellationTokenSource? _searchCancellationTokenSource;
 

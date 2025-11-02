@@ -1,4 +1,4 @@
-<ui:UiPage
+﻿<ui:UiPage
     x:Class="Voidstrap.UI.Elements.Settings.Pages.BehaviourPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -122,7 +122,7 @@
             <ui:CardExpander.Header>
                 <StackPanel>
                     <TextBlock FontSize="14" Text="Cleaner" />
-                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="Bloodstrap will remove old data to save on space" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="GalaxyStrap will remove old data to save on space" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
                 </StackPanel>
             </ui:CardExpander.Header>
             <StackPanel>

@@ -1,4 +1,4 @@
-<ui:UiPage
+﻿<ui:UiPage
     x:Class="Voidstrap.UI.Elements.Settings.Pages.WebhooksPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -82,7 +82,7 @@
             <ui:TextBox
                 x:Name="WebhookUsernameTextBox"
                 Icon="Rename24"
-                PlaceholderText="Bloodstrap Bot"
+                PlaceholderText="GalaxyStrap Bot"
                 Text="{Binding WebhookUsername, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </ui:CardControl>
 

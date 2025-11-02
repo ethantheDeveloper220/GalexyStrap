@@ -59,6 +59,10 @@ namespace Voidstrap.UI.ViewModels.Settings
             App.State.Save();
             App.FastFlags.Save();
 
+            // Log FastFlags save location for debugging
+            App.Logger.WriteLine(LOG_IDENT, $"FastFlags saved to: {App.FastFlags.FileLocation}");
+            ActivityLogger.Log($"FastFlags saved to: {App.FastFlags.FileLocation}", LogLevel.Debug);
+
             foreach (var pair in App.PendingSettingTasks)
             {
                 var task = pair.Value;
@@ -74,6 +78,13 @@ namespace Voidstrap.UI.ViewModels.Settings
             App.PendingSettingTasks.Clear();
 
             ActivityLogger.LogSuccess("Settings saved successfully");
+            
+            // Notify user to restart Roblox if FastFlags changed
+            if (App.FastFlags.Changed)
+            {
+                ActivityLogger.Log("FastFlags have been modified. Please restart Roblox for changes to take effect.", LogLevel.Warning);
+            }
+            
             RequestSaveNoticeEvent?.Invoke(this, EventArgs.Empty);
         }
 

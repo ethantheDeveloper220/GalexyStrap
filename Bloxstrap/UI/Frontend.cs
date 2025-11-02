@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 
 using Voidstrap.UI.Elements.Bootstrapper;
 using Voidstrap.UI.Elements.Dialogs;
@@ -110,7 +110,7 @@ namespace Voidstrap.UI
         {
             var notifyIcon = new System.Windows.Forms.NotifyIcon
             {
-                Icon = Properties.Resources.IconBloodstrap,
+                Icon = Properties.Resources.IconGalaxyStrap,
                 Text = App.ProjectName,
                 Visible = true
             };

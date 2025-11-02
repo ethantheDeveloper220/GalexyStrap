@@ -1,4 +1,4 @@
-﻿using Voidstrap.Enums.FlagPresets;
+using Voidstrap.Enums.FlagPresets;
 using System.Windows;
 
 namespace Voidstrap
@@ -253,6 +253,9 @@ namespace Voidstrap
             { "Network.BetterPacketSending7", "DFIntMaxProcessPacketsJobScaling" },
             { "Network.BetterPacketSending8", "DFIntMaxProcessPacketsStepsAccumulated" },
             { "Network.BetterPacketSending9", "DFIntMaxProcessPacketsStepsPerCyclic" },
+
+            // Region & Server Selection
+            { "Network.PreferredRegion", "FStringPreferredServerRegion" },
 
             // Recommended Buffering
             { "Recommended.Buffer", "FIntRakNetResendBufferArrayLength" },

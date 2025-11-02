@@ -1,4 +1,4 @@
-<base:WpfUiWindow
+﻿<base:WpfUiWindow
     x:Class="Voidstrap.UI.Elements.Dialogs.ChannelListsDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -42,7 +42,7 @@
             Title="Available Channels"
             Grid.Row="0"
             Padding="8,6"
-            Icon="pack://application:,,,/Bloodstrap.ico"
+            Icon="pack://application:,,,/GalaxyStrap.ico"
             CanMaximize="True"
             ShowMaximize="True"
             ShowMinimize="True" />

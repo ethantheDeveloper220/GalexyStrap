@@ -1,4 +1,4 @@
-<ui:UiPage
+﻿<ui:UiPage
     x:Class="Voidstrap.UI.Elements.Settings.Pages.BackupPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:controls="clr-namespace:Voidstrap.UI.Elements.Controls"
-    Title="Backup &amp; Restore"
+    Title="Backup and Data"
     Scrollable="True"
     d:DesignHeight="800"
     d:DesignWidth="800"
@@ -16,7 +16,7 @@
         <!-- Page Header -->
         <TextBlock FontSize="28" FontWeight="Bold" Text="Configuration Backup &amp; Restore" Margin="0,0,0,8"/>
         <TextBlock FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Margin="0,0,0,24">
-            Backup and restore your Bloodstrap configuration including FastFlags, settings, mods, and themes.
+            Backup and restore your GalaxyStrap configuration including FastFlags, settings, mods, and themes.
         </TextBlock>
 
         <!-- Export Section -->
@@ -76,6 +76,32 @@
                           Click="ImportConfig_Click"
                           Appearance="Primary"
                           Margin="0,16,0,0"/>
+            </StackPanel>
+        </ui:CardExpander>
+
+        <!-- Roblox Repair Tools -->
+        <ui:CardExpander Margin="0,0,0,16" IsExpanded="False">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="14" Text="Roblox Repair Tools" />
+                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="Fix common Roblox installation issues" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+            
+            <StackPanel>
+                <controls:OptionControl Header="Fix RobloxPlayerBeta.dll" Description="Reinstall Roblox without launching (fixes corrupted DLL files)">
+                    <ui:Button Content="Fix Now" 
+                              Icon="Wrench24" 
+                              Click="FixRobloxDLL_Click"
+                              Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Reset All Data" Description="Completely reset GalaxyStrap and Roblox data (WARNING: This will delete all settings)">
+                    <ui:Button Content="Reset Everything" 
+                              Icon="Delete24" 
+                              Click="ResetAllData_Click"
+                              Appearance="Caution"/>
+                </controls:OptionControl>
             </StackPanel>
         </ui:CardExpander>
 

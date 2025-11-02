@@ -1,4 +1,4 @@
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -15,7 +15,7 @@ namespace Voidstrap.UI.Elements.Settings.Pages
     {
         private readonly string backgroundImagePath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "Bloodstrap",
+            "GalaxyStrap",
             "chat_bg.png"
         );
 

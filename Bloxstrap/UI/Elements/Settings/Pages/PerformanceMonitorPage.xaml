@@ -1,0 +1,241 @@
+<ui:UiPage
+    x:Class="Voidstrap.UI.Elements.Settings.Pages.PerformanceMonitorPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:controls="clr-namespace:Voidstrap.UI.Elements.Controls"
+    Title="Performance Monitor"
+    Scrollable="True"
+    d:DesignHeight="800"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <StackPanel Margin="0,0,14,14">
+        <!-- Page Header -->
+        <TextBlock FontSize="28" FontWeight="Bold" Text="Performance Monitor" Margin="0,0,0,8"/>
+        <TextBlock FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Margin="0,0,0,24">
+            Monitor real-time performance metrics for Roblox and your system.
+        </TextBlock>
+
+        <!-- Open Monitor Button -->
+        <ui:CardAction Icon="ChartMultiple24" 
+                      Click="OpenMonitor_Click"
+                      Margin="0,0,0,16">
+            <StackPanel>
+                <TextBlock FontSize="16" FontWeight="SemiBold" Text="Open Performance Monitor"/>
+                <TextBlock Margin="0,4,0,0" 
+                          FontSize="12" 
+                          Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                          Text="Launch the real-time performance monitoring window"/>
+            </StackPanel>
+        </ui:CardAction>
+
+        <!-- Monitor Settings -->
+        <ui:CardExpander Margin="0,0,0,16" IsExpanded="True">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="14" Text="Monitor Settings" />
+                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="Configure performance monitor behavior" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+            
+            <StackPanel>
+                <controls:OptionControl Header="Enable Performance Monitor" 
+                                       Description="Allow performance monitoring features">
+                    <ui:ToggleSwitch IsChecked="{Binding EnablePerformanceMonitor, Mode=TwoWay}"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Auto-Start with Roblox" 
+                                       Description="Automatically open monitor when Roblox launches">
+                    <ui:ToggleSwitch IsChecked="{Binding AutoStartMonitor, Mode=TwoWay}"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Always On Top" 
+                                       Description="Keep monitor window above other windows">
+                    <ui:ToggleSwitch IsChecked="{Binding PerformanceMonitorAlwaysOnTop, Mode=TwoWay}"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Update Interval (ms)" 
+                                       Description="How often to refresh metrics (lower = more CPU usage)">
+                    <StackPanel Orientation="Horizontal">
+                        <Slider Minimum="100" 
+                               Maximum="2000" 
+                               Width="200"
+                               Value="{Binding UpdateInterval, Mode=TwoWay}"
+                               TickFrequency="100"
+                               IsSnapToTickEnabled="True"
+                               Margin="0,0,12,0"/>
+                        <TextBlock Text="{Binding UpdateInterval, StringFormat={}{0} ms}" 
+                                  FontWeight="SemiBold"
+                                  VerticalAlignment="Center"
+                                  MinWidth="60"/>
+                    </StackPanel>
+                </controls:OptionControl>
+            </StackPanel>
+        </ui:CardExpander>
+
+        <!-- Display Options -->
+        <ui:CardExpander Margin="0,0,0,16" IsExpanded="False">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="14" Text="Display Options" />
+                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="Customize what metrics to show" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+            
+            <StackPanel>
+                <controls:OptionControl Header="Show CPU Usage" 
+                                       Description="Display CPU usage metrics">
+                    <ui:ToggleSwitch IsChecked="{Binding ShowCpuUsage, Mode=TwoWay}"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Show Memory Usage" 
+                                       Description="Display RAM usage metrics">
+                    <ui:ToggleSwitch IsChecked="{Binding ShowMemoryUsage, Mode=TwoWay}"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Show FPS" 
+                                       Description="Display frames per second">
+                    <ui:ToggleSwitch IsChecked="{Binding ShowFps, Mode=TwoWay}"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Show Network Ping" 
+                                       Description="Display network latency">
+                    <ui:ToggleSwitch IsChecked="{Binding ShowPing, Mode=TwoWay}"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Show GPU Usage" 
+                                       Description="Display GPU usage metrics">
+                    <ui:ToggleSwitch IsChecked="{Binding ShowGpuUsage, Mode=TwoWay}"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Show Disk Activity" 
+                                       Description="Display disk read/write activity">
+                    <ui:ToggleSwitch IsChecked="{Binding ShowDiskActivity, Mode=TwoWay}"/>
+                </controls:OptionControl>
+            </StackPanel>
+        </ui:CardExpander>
+
+        <!-- Alerts & Notifications -->
+        <ui:CardExpander Margin="0,0,0,16" IsExpanded="False">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="14" Text="Alerts &amp; Notifications" />
+                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="Get notified when metrics exceed thresholds" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+            
+            <StackPanel>
+                <controls:OptionControl Header="Enable Performance Alerts" 
+                                       Description="Show notifications for performance issues">
+                    <ui:ToggleSwitch IsChecked="{Binding EnablePerformanceAlerts, Mode=TwoWay}"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="High CPU Alert Threshold (%)" 
+                                       Description="Alert when CPU usage exceeds this value">
+                    <StackPanel Orientation="Horizontal">
+                        <Slider Minimum="50" 
+                               Maximum="100" 
+                               Width="200"
+                               Value="{Binding CpuAlertThreshold, Mode=TwoWay}"
+                               TickFrequency="10"
+                               IsSnapToTickEnabled="True"
+                               Margin="0,0,12,0"/>
+                        <TextBlock Text="{Binding CpuAlertThreshold, StringFormat={}{0}%}" 
+                                  FontWeight="SemiBold"
+                                  VerticalAlignment="Center"
+                                  MinWidth="50"/>
+                    </StackPanel>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="High Memory Alert Threshold (MB)" 
+                                       Description="Alert when memory usage exceeds this value">
+                    <StackPanel Orientation="Horizontal">
+                        <Slider Minimum="2000" 
+                               Maximum="16000" 
+                               Width="200"
+                               Value="{Binding MemoryAlertThreshold, Mode=TwoWay}"
+                               TickFrequency="1000"
+                               IsSnapToTickEnabled="True"
+                               Margin="0,0,12,0"/>
+                        <TextBlock Text="{Binding MemoryAlertThreshold, StringFormat={}{0} MB}" 
+                                  FontWeight="SemiBold"
+                                  VerticalAlignment="Center"
+                                  MinWidth="80"/>
+                    </StackPanel>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Low FPS Alert Threshold" 
+                                       Description="Alert when FPS drops below this value">
+                    <StackPanel Orientation="Horizontal">
+                        <Slider Minimum="15" 
+                               Maximum="60" 
+                               Width="200"
+                               Value="{Binding FpsAlertThreshold, Mode=TwoWay}"
+                               TickFrequency="5"
+                               IsSnapToTickEnabled="True"
+                               Margin="0,0,12,0"/>
+                        <TextBlock Text="{Binding FpsAlertThreshold, StringFormat={}{0} FPS}" 
+                                  FontWeight="SemiBold"
+                                  VerticalAlignment="Center"
+                                  MinWidth="60"/>
+                    </StackPanel>
+                </controls:OptionControl>
+            </StackPanel>
+        </ui:CardExpander>
+
+        <!-- Logging Options -->
+        <ui:CardExpander Margin="0,0,0,16" IsExpanded="False">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="14" Text="Performance Logging" />
+                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="Save performance data to files" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+            
+            <StackPanel>
+                <controls:OptionControl Header="Enable Performance Logging" 
+                                       Description="Save performance metrics to log files">
+                    <ui:ToggleSwitch IsChecked="{Binding EnablePerformanceLogging, Mode=TwoWay}"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Log Interval (seconds)" 
+                                       Description="How often to write metrics to log">
+                    <StackPanel Orientation="Horizontal">
+                        <Slider Minimum="5" 
+                               Maximum="60" 
+                               Width="200"
+                               Value="{Binding LogInterval, Mode=TwoWay}"
+                               TickFrequency="5"
+                               IsSnapToTickEnabled="True"
+                               Margin="0,0,12,0"/>
+                        <TextBlock Text="{Binding LogInterval, StringFormat={}{0}s}" 
+                                  FontWeight="SemiBold"
+                                  VerticalAlignment="Center"
+                                  MinWidth="50"/>
+                    </StackPanel>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Auto-Delete Old Logs" 
+                                       Description="Automatically delete logs older than 7 days">
+                    <ui:ToggleSwitch IsChecked="{Binding AutoDeleteOldLogs, Mode=TwoWay}"/>
+                </controls:OptionControl>
+            </StackPanel>
+        </ui:CardExpander>
+
+        <!-- Info Card -->
+        <ui:CardControl Icon="Info24" Header="About Performance Monitor">
+            <TextBlock TextWrapping="Wrap" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}">
+                <Run Text="The Performance Monitor tracks real-time metrics including:"/><LineBreak/>
+                <Run Text="• CPU and Memory usage"/><LineBreak/>
+                <Run Text="• FPS (Frames Per Second)"/><LineBreak/>
+                <Run Text="• Network ping and packet loss"/><LineBreak/>
+                <Run Text="• GPU usage and disk activity"/><LineBreak/>
+                <LineBreak/>
+                <Run Text="Use this tool to identify performance bottlenecks and optimize your gaming experience."/>
+            </TextBlock>
+        </ui:CardControl>
+    </StackPanel>
+</ui:UiPage>

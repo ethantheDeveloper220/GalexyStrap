@@ -1,4 +1,4 @@
-using Voidstrap.Integrations;
+﻿using Voidstrap.Integrations;
 using Voidstrap.UI.Elements.About;
 using Voidstrap.UI.Elements.ContextMenu;
 using System;
@@ -28,11 +28,12 @@ namespace Voidstrap.UI
 
             _notifyIcon = new NotifyIcon(new System.ComponentModel.Container())
             {
-                Icon = Properties.Resources.IconBloodstrap,
-                Text = "Bloodstrap",
+                Icon = Properties.Resources.IconGalaxyStrap,
+                Text = "GalaxyStrap",
                 Visible = true
             };
             _notifyIcon.MouseClick += NotifyIcon_MouseClick;
+            _notifyIcon.MouseUp += NotifyIcon_MouseUp;
 
             if (ActivityWatcher != null && App.Settings.Prop.ShowServerDetails)
                 ActivityWatcher.OnGameJoin += async (s, e) => await OnGameJoinAsync(s, e);
@@ -43,14 +44,39 @@ namespace Voidstrap.UI
 
         private void NotifyIcon_MouseClick(object? sender, MouseEventArgs e)
         {
+            App.Logger.WriteLine("NotifyIconWrapper::NotifyIcon_MouseClick", $"Mouse button clicked: {e.Button}");
+            
             if (e.Button != MouseButtons.Right)
                 return;
 
-            _menuContainer.Dispatcher.Invoke(() =>
+            OpenContextMenu();
+        }
+
+        private void NotifyIcon_MouseUp(object? sender, MouseEventArgs e)
+        {
+            App.Logger.WriteLine("NotifyIconWrapper::NotifyIcon_MouseUp", $"Mouse button released: {e.Button}");
+            
+            if (e.Button != MouseButtons.Right)
+                return;
+
+            OpenContextMenu();
+        }
+
+        private void OpenContextMenu()
+        {
+            try
             {
-                _menuContainer.Activate();
-                _menuContainer.ContextMenu.IsOpen = true;
-            });
+                _menuContainer.Dispatcher.Invoke(() =>
+                {
+                    App.Logger.WriteLine("NotifyIconWrapper::OpenContextMenu", "Opening context menu");
+                    _menuContainer.Activate();
+                    _menuContainer.ContextMenu.IsOpen = true;
+                });
+            }
+            catch (Exception ex)
+            {
+                App.Logger.WriteLine("NotifyIconWrapper::OpenContextMenu", $"Error opening context menu: {ex.Message}");
+            }
         }
 
         public async Task OnGameJoinAsync(object? sender, EventArgs e)

@@ -1,4 +1,4 @@
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using ICSharpCode.SharpZipLib.Zip;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -126,7 +126,7 @@ namespace Voidstrap.UI.ViewModels.Settings
         #region AutoSave Path
         private readonly string AutoSavePath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "Bloodstrap",
+            "GalaxyStrap",
             "autosave_plugin.zip"
         );
         #endregion
@@ -219,7 +219,7 @@ namespace Voidstrap.UI.ViewModels.Settings
 
         private readonly string PluginSessionPath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "Bloodstrap",
+            "GalaxyStrap",
             "plugin_session.json"
         );
 

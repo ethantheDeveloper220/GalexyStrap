@@ -1,4 +1,4 @@
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -61,7 +61,7 @@ namespace Voidstrap.UI.Elements.Settings.Pages
 
                 App.Logger?.WriteLine(LOG_IDENT, $"DownloadForModGenerator returned. Version: {version} ({versionHash})");
 
-                string VoidstrapTemp = Path.Combine(Path.GetTempPath(), "Bloodstrap");
+                string VoidstrapTemp = Path.Combine(Path.GetTempPath(), "GalaxyStrap");
 
                 string luaPackagesDir = Path.Combine(VoidstrapTemp, "ExtraContent", "LuaPackages");
                 string extraTexturesDir = Path.Combine(VoidstrapTemp, "ExtraContent", "textures");
@@ -306,7 +306,7 @@ namespace Voidstrap.UI.Elements.Settings.Pages
                 var infoData = new
                 {
                     VoidstrapVersion = App.Version,
-                    CreatedUsing = "Bloodstrap",
+                    CreatedUsing = "GalaxyStrap",
                     RobloxVersion = version,
                     RobloxVersionHash = versionHash,
                     OptionsUsed = new

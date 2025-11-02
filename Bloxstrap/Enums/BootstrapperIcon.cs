@@ -1,10 +1,10 @@
-namespace Voidstrap.Enums
+﻿namespace Voidstrap.Enums
 {
     public enum BootstrapperIcon
     {
-        [EnumName(StaticName = "Bloodstrap")]
-        IconBloodstrap,
-        [EnumName(StaticName = "Bloodstrap")]
+        [EnumName(StaticName = "GalaxyStrap")]
+        IconGalaxyStrap,
+        [EnumName(StaticName = "GalaxyStrap")]
         IconVoidstrap,
         [EnumName(StaticName = "2008")]
         Icon2008,

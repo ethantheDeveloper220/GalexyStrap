@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -26,7 +26,7 @@ namespace Voidstrap.UI.ViewModels.ContextMenu
 
         private readonly string _configPath =
             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                         "Bloodstrap", "discord-rpc.json");
+                         "GalaxyStrap", "discord-rpc.json");
 
         private CancellationTokenSource _saveCts;
         private CancellationTokenSource _presenceCts;
@@ -35,7 +35,7 @@ namespace Voidstrap.UI.ViewModels.ContextMenu
         private readonly Dispatcher _dispatcher = Application.Current?.Dispatcher ?? Dispatcher.CurrentDispatcher;
 
         private string _applicationId;
-        private string _appName = "Bloodstrap";
+        private string _appName = "GalaxyStrap";
         private string _details = "";
         private string _state = "";
         private string _largeImageKey = "large";

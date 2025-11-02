@@ -1,4 +1,4 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -88,7 +88,7 @@ namespace Voidstrap.UI.ViewModels.Settings
             try
             {
                 ActivityLogger.Log("Sending test webhook...", LogLevel.Info);
-                await WebhookHelper.SendWebhook(WebhookUrl, WebhookUsername, "Test Message", "This is a test message from Bloodstrap!");
+                await WebhookHelper.SendWebhook(WebhookUrl, WebhookUsername, "Test Message", "This is a test message from GalaxyStrap!");
                 MessageBox.Show("Test webhook sent successfully!", "Webhook Test", MessageBoxButton.OK, MessageBoxImage.Information);
                 ActivityLogger.LogSuccess("Test webhook sent successfully");
             }

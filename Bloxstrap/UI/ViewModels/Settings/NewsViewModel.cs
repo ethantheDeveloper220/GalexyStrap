@@ -1,4 +1,4 @@
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -59,7 +59,7 @@ namespace Voidstrap.UI.ViewModels.Settings
                 Timeout = TimeSpan.FromSeconds(8)
             };
             _http.DefaultRequestHeaders.UserAgent.Add(
-                new ProductInfoHeaderValue("Bloodstrap", "1.0"));
+                new ProductInfoHeaderValue("GalaxyStrap", "1.0"));
             _ = SafeRefreshAsync();
 
             _timer = new DispatcherTimer

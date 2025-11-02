@@ -1,0 +1,306 @@
+<ui:UiPage
+    x:Class="Voidstrap.UI.Elements.Settings.Pages.PCTweakerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:controls="clr-namespace:Voidstrap.UI.Elements.Controls"
+    Title="PC Tweaker"
+    Scrollable="True"
+    d:DesignHeight="800"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <StackPanel Margin="0,0,0,16">
+        <!-- Page Header -->
+        <TextBlock FontSize="28" FontWeight="Bold" Text="PC Performance Tweaker" Margin="0,0,0,8"/>
+        <TextBlock FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Margin="0,0,0,24">
+            Optimize your PC for better gaming performance. These tweaks modify Windows settings to reduce latency and improve FPS.
+        </TextBlock>
+
+        <!-- Warning Card -->
+        <ui:CardControl Icon="Warning24" Margin="0,0,0,16">
+            <StackPanel>
+                <TextBlock FontWeight="Bold" FontSize="14" Text="⚠️ Important Notice" Margin="0,0,0,8"/>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}">
+                    These tweaks modify Windows system settings. While safe, some changes may require administrator privileges. 
+                    Create a system restore point before applying major tweaks. You can revert changes at any time.
+                </TextBlock>
+            </StackPanel>
+        </ui:CardControl>
+
+        <!-- Windows Optimization -->
+        <ui:CardExpander Margin="0,0,0,16" IsExpanded="True">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="14" Text="Windows Optimization" />
+                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="Optimize Windows settings for gaming" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+            
+            <StackPanel>
+                <controls:OptionControl Header="Disable Game DVR" Description="Disable Xbox Game Bar recording (reduces background CPU usage)">
+                    <ui:Button Content="Apply" Click="DisableGameDVR_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Disable Fullscreen Optimizations" Description="Disable Windows fullscreen optimizations for better FPS">
+                    <ui:Button Content="Apply" Click="DisableFullscreenOpt_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="High Performance Power Plan" Description="Set Windows power plan to High Performance mode">
+                    <ui:Button Content="Apply" Click="SetHighPerformance_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Disable Windows Animations" Description="Disable visual effects and animations for better performance">
+                    <ui:Button Content="Apply" Click="DisableAnimations_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+            </StackPanel>
+        </ui:CardExpander>
+
+        <!-- Network Optimization -->
+        <ui:CardExpander Margin="0,0,0,16" IsExpanded="False">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="14" Text="Network Optimization" />
+                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="Reduce network latency and improve ping" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+            
+            <StackPanel>
+                <controls:OptionControl Header="Optimize TCP Settings" Description="Optimize TCP/IP settings for gaming (reduces latency)">
+                    <ui:Button Content="Apply" Click="OptimizeTCP_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Disable Nagle's Algorithm" Description="Disable packet batching for lower latency">
+                    <ui:Button Content="Apply" Click="DisableNagle_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Flush DNS Cache" Description="Clear DNS cache to fix connection issues">
+                    <ui:Button Content="Flush" Click="FlushDNS_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Reset Network Stack" Description="Reset Windows network stack (fixes most network issues)">
+                    <ui:Button Content="Reset" Click="ResetNetwork_Click" Appearance="Caution"/>
+                </controls:OptionControl>
+            </StackPanel>
+        </ui:CardExpander>
+
+        <!-- GPU Optimization -->
+        <ui:CardExpander Margin="0,0,0,16" IsExpanded="False">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="14" Text="GPU Optimization" />
+                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="Optimize graphics card settings" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+            
+            <StackPanel>
+                <controls:OptionControl Header="Disable Hardware Acceleration" Description="Disable GPU acceleration in Windows (can improve FPS in some cases)">
+                    <ui:Button Content="Apply" Click="DisableHWAccel_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Set GPU Scheduling" Description="Enable Hardware-Accelerated GPU Scheduling (Windows 10 2004+)">
+                    <ui:Button Content="Enable" Click="EnableGPUScheduling_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Optimize NVIDIA Settings" Description="Apply optimal NVIDIA control panel settings (NVIDIA GPUs only)">
+                    <ui:Button Content="Apply" Click="OptimizeNVIDIA_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+            </StackPanel>
+        </ui:CardExpander>
+
+        <!-- System Cleanup -->
+        <ui:CardExpander Margin="0,0,0,16" IsExpanded="False">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="14" Text="System Cleanup" />
+                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="Clean temporary files and free up disk space" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+            
+            <StackPanel>
+                <controls:OptionControl Header="Clear Temp Files" Description="Delete temporary files from Windows and Roblox">
+                    <ui:Button Content="Clean" Click="ClearTemp_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Clear Roblox Cache" Description="Clear Roblox cache and logs (fixes many issues)">
+                    <ui:Button Content="Clear" Click="ClearRobloxCache_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Disk Cleanup" Description="Run Windows Disk Cleanup utility">
+                    <ui:Button Content="Run" Click="RunDiskCleanup_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+            </StackPanel>
+        </ui:CardExpander>
+
+        <!-- CPU Optimization -->
+        <ui:CardExpander Margin="0,0,0,16" IsExpanded="False">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="14" Text="CPU Optimization" />
+                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="Optimize CPU performance and reduce latency" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+            
+            <StackPanel>
+                <controls:OptionControl Header="Disable CPU Parking" Description="Prevent CPU cores from entering sleep state">
+                    <ui:Button Content="Apply" Click="DisableCPUParking_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Set CPU Priority" Description="Set Roblox to high CPU priority">
+                    <ui:Button Content="Apply" Click="SetCPUPriority_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Disable Core Parking" Description="Keep all CPU cores active at all times">
+                    <ui:Button Content="Apply" Click="DisableCoreParking_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Optimize Thread Scheduling" Description="Improve thread scheduling for better performance">
+                    <ui:Button Content="Apply" Click="OptimizeThreadScheduling_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+            </StackPanel>
+        </ui:CardExpander>
+
+        <!-- Memory Optimization -->
+        <ui:CardExpander Margin="0,0,0,16" IsExpanded="False">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="14" Text="Memory Optimization" />
+                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="Optimize RAM usage and reduce memory latency" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+            
+            <StackPanel>
+                <controls:OptionControl Header="Clear Standby Memory" Description="Clear standby memory list to free up RAM">
+                    <ui:Button Content="Clear" Click="ClearStandbyMemory_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Disable Paging Executive" Description="Keep system code in RAM (requires 8GB+ RAM)">
+                    <ui:Button Content="Apply" Click="DisablePagingExecutive_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Optimize Page File" Description="Configure page file for best performance">
+                    <ui:Button Content="Optimize" Click="OptimizePageFile_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Disable Memory Compression" Description="Disable Windows memory compression">
+                    <ui:Button Content="Disable" Click="DisableMemoryCompression_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+            </StackPanel>
+        </ui:CardExpander>
+
+        <!-- Gaming Optimizations -->
+        <ui:CardExpander Margin="0,0,0,16" IsExpanded="False">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="14" Text="Gaming Optimizations" />
+                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="Specific optimizations for gaming performance" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+            
+            <StackPanel>
+                <controls:OptionControl Header="Enable Game Mode" Description="Enable Windows Game Mode for better FPS">
+                    <ui:Button Content="Enable" Click="EnableGameMode_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Disable VSync" Description="Disable VSync for lower input lag">
+                    <ui:Button Content="Disable" Click="DisableVSync_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Optimize Mouse Settings" Description="Disable mouse acceleration and enhance pointer precision">
+                    <ui:Button Content="Optimize" Click="OptimizeMouse_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Disable Game Bar" Description="Completely disable Xbox Game Bar">
+                    <ui:Button Content="Disable" Click="DisableGameBar_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Set Ultimate Performance" Description="Enable hidden Ultimate Performance power plan">
+                    <ui:Button Content="Enable" Click="SetUltimatePerformance_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+            </StackPanel>
+        </ui:CardExpander>
+
+        <!-- Advanced Tweaks -->
+        <ui:CardExpander Margin="0,0,0,16" IsExpanded="False">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="14" Text="Advanced Tweaks" />
+                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="Advanced system modifications (use with caution)" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+            
+            <StackPanel>
+                <controls:OptionControl Header="Disable Windows Defender" Description="Temporarily disable Windows Defender (not recommended)">
+                    <ui:Button Content="Disable" Click="DisableDefender_Click" Appearance="Caution"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Disable Telemetry" Description="Disable Windows telemetry and data collection">
+                    <ui:Button Content="Apply" Click="DisableTelemetry_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Optimize Services" Description="Disable unnecessary Windows services">
+                    <ui:Button Content="Optimize" Click="OptimizeServices_Click" Appearance="Caution"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Registry Optimization" Description="Apply registry tweaks for better performance">
+                    <ui:Button Content="Apply" Click="OptimizeRegistry_Click" Appearance="Caution"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Disable Cortana" Description="Disable Cortana background processes">
+                    <ui:Button Content="Disable" Click="DisableCortana_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Disable Background Apps" Description="Prevent apps from running in background">
+                    <ui:Button Content="Disable" Click="DisableBackgroundApps_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Disable Startup Programs" Description="Manage and disable startup programs">
+                    <ui:Button Content="Manage" Click="ManageStartup_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Optimize SSD" Description="Apply SSD-specific optimizations">
+                    <ui:Button Content="Optimize" Click="OptimizeSSD_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+            </StackPanel>
+        </ui:CardExpander>
+
+        <!-- Restore Options -->
+        <ui:CardExpander Margin="0,0,0,16" IsExpanded="False">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="14" Text="Restore &amp; Reset" />
+                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="Revert tweaks and restore default settings" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+            
+            <StackPanel>
+                <controls:OptionControl Header="Restore All Tweaks" Description="Revert all PC tweaks to Windows defaults">
+                    <ui:Button Content="Restore" Click="RestoreAll_Click" Appearance="Caution"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Create Restore Point" Description="Create a Windows system restore point">
+                    <ui:Button Content="Create" Click="CreateRestorePoint_Click" Appearance="Primary"/>
+                </controls:OptionControl>
+            </StackPanel>
+        </ui:CardExpander>
+
+        <!-- Status Section -->
+        <ui:CardControl Icon="Info24" Header="Status">
+            <StackPanel>
+                <TextBlock x:Name="StatusText" 
+                          Text="Ready to apply tweaks" 
+                          FontSize="14" 
+                          TextWrapping="Wrap"
+                          Margin="0,0,0,8"/>
+                
+                <TextBlock x:Name="LastActionText" 
+                          Text="" 
+                          FontSize="12" 
+                          Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                          TextWrapping="Wrap"/>
+            </StackPanel>
+        </ui:CardControl>
+    </StackPanel>
+</ui:UiPage>

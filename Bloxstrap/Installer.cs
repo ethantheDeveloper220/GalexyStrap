@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 using Voidstrap;
 using Microsoft.Win32;
 
@@ -538,7 +538,7 @@ namespace Voidstrap
                     }
 
                     string oldDesktopPath = Path.Combine(Paths.Desktop, "Play Roblox.lnk");
-                    string oldStartPath = Path.Combine(Paths.WindowsStartMenu, "Bloodstrap");
+                    string oldStartPath = Path.Combine(Paths.WindowsStartMenu, "GalaxyStrap");
 
                     if (File.Exists(oldDesktopPath))
                         File.Move(oldDesktopPath, DesktopShortcut, true);

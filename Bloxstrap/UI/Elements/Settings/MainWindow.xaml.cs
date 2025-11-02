@@ -1,16 +1,15 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
-using System.Drawing;
 using Voidstrap.UI.Elements.Dialogs;
 using Voidstrap.UI.ViewModels.Settings;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Voidstrap.UI.Elements.Settings
 {
@@ -18,8 +17,6 @@ namespace Voidstrap.UI.Elements.Settings
     {
         private Models.Persistable.WindowState _state => App.State.Prop.SettingsWindow;
         private bool _isSaveAndLaunchClicked = false;
-        private NotifyIcon? _trayIcon;
-        private bool _isReallyClosing = false;
 
         public MainWindow(bool showAlreadyRunningWarning)
         {
@@ -27,7 +24,6 @@ namespace Voidstrap.UI.Elements.Settings
             InitializeViewModel();
             InitializeWindowState();
             InitializeNavigation();
-            InitializeTrayIcon();
             UpdateButtonContent();
             App.Logger.WriteLine("MainWindow", "Initializing settings window");
             if (showAlreadyRunningWarning)
@@ -90,120 +86,6 @@ namespace Voidstrap.UI.Elements.Settings
             RootNavigation.Navigated += SaveNavigation;
         }
 
-        private void InitializeTrayIcon()
-        {
-            _trayIcon = new NotifyIcon
-            {
-                Icon = Properties.Resources.IconBloodstrap,
-                Text = "Bloodstrap - Click to show",
-                Visible = false
-            };
-
-            // Create context menu
-            var contextMenu = new ContextMenuStrip();
-            contextMenu.BackColor = System.Drawing.Color.FromArgb(32, 32, 32);
-            contextMenu.ForeColor = System.Drawing.Color.White;
-            contextMenu.Renderer = new ModernMenuRenderer();
-
-            // Show/Hide item
-            var showItem = new ToolStripMenuItem
-            {
-                Text = "Show Bloodstrap",
-                Image = ResizeIcon(SystemIcons.Application, 16, 16),
-                Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold)
-            };
-            showItem.Click += (s, e) => ShowFromTray();
-            contextMenu.Items.Add(showItem);
-
-            contextMenu.Items.Add(new ToolStripSeparator());
-
-            // Webhook Manager item
-            var webhookItem = new ToolStripMenuItem
-            {
-                Text = "Webhook Manager",
-                Image = ResizeIcon(SystemIcons.Shield, 16, 16)
-            };
-            webhookItem.Click += (s, e) =>
-            {
-                ShowFromTray();
-                var webhookManager = new WebhookManagerDialog();
-                webhookManager.ShowDialog();
-            };
-            contextMenu.Items.Add(webhookItem);
-
-            // Activity Logger item
-            var activityItem = new ToolStripMenuItem
-            {
-                Text = "Activity Logger",
-                Image = ResizeIcon(SystemIcons.Information, 16, 16)
-            };
-            activityItem.Click += (s, e) =>
-            {
-                ShowFromTray();
-                // Open activity logger if you have one
-            };
-            contextMenu.Items.Add(activityItem);
-
-            contextMenu.Items.Add(new ToolStripSeparator());
-
-            // Settings item
-            var settingsItem = new ToolStripMenuItem
-            {
-                Text = "Settings",
-                Image = ResizeIcon(SystemIcons.WinLogo, 16, 16)
-            };
-            settingsItem.Click += (s, e) => ShowFromTray();
-            contextMenu.Items.Add(settingsItem);
-
-            contextMenu.Items.Add(new ToolStripSeparator());
-
-            // Exit item
-            var exitItem = new ToolStripMenuItem
-            {
-                Text = "Exit Bloodstrap",
-                Image = ResizeIcon(SystemIcons.Error, 16, 16),
-                Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular)
-            };
-            exitItem.Click += (s, e) => ExitApplication();
-            contextMenu.Items.Add(exitItem);
-
-            _trayIcon.ContextMenuStrip = contextMenu;
-            _trayIcon.MouseClick += TrayIcon_MouseClick;
-        }
-
-        private void TrayIcon_MouseClick(object? sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ShowFromTray();
-            }
-        }
-
-        private void ShowFromTray()
-        {
-            Show();
-            this.WindowState = System.Windows.WindowState.Normal;
-            Activate();
-            _trayIcon!.Visible = false;
-        }
-
-        private void ExitApplication()
-        {
-            _isReallyClosing = true;
-            _trayIcon?.Dispose();
-            Close();
-        }
-
-        private Bitmap ResizeIcon(Icon icon, int width, int height)
-        {
-            var bitmap = new Bitmap(width, height);
-            using (var g = Graphics.FromImage(bitmap))
-            {
-                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                g.DrawImage(icon.ToBitmap(), 0, 0, width, height);
-            }
-            return bitmap;
-        }
 
         #endregion
 
@@ -250,29 +132,27 @@ namespace Voidstrap.UI.Elements.Settings
 
         private void WpfUiWindow_Closing(object sender, CancelEventArgs e)
         {
-            if (!_isReallyClosing)
-            {
-                // Minimize to tray instead of closing
-                e.Cancel = true;
-                Hide();
-                _trayIcon!.Visible = true;
-                _trayIcon.ShowBalloonTip(2000, "Bloodstrap", "Bloodstrap is still running in the system tray", ToolTipIcon.Info);
-            }
-            else
-            {
-                SaveWindowState();
-            }
+            // Minimize to tray instead of closing
+            e.Cancel = true;
+            Hide();
+            
+            // Show tray notification
+            Frontend.ShowBalloonTip(
+                "GalaxyStrap",
+                "GalaxyStrap is still running in the system tray. Right-click the tray icon for options.",
+                System.Windows.Forms.ToolTipIcon.Info,
+                3
+            );
+            
+            SaveWindowState();
         }
 
         private void WpfUiWindow_Closed(object sender, EventArgs e)
         {
-            if (_isReallyClosing)
-            {
-                if (App.LaunchSettings.TestModeFlag.Active)
-                    LaunchHandler.LaunchRoblox(LaunchMode.Player);
-                else
-                    App.SoftTerminate();
-            }
+            if (App.LaunchSettings.TestModeFlag.Active)
+                LaunchHandler.LaunchRoblox(LaunchMode.Player);
+            else
+                App.SoftTerminate();
         }
 
         private void SaveWindowState()
@@ -321,48 +201,5 @@ namespace Voidstrap.UI.Elements.Settings
         private void Button_Click_2(object sender, RoutedEventArgs e) { }
 
         #endregion
-    }
-
-    // Modern dark theme renderer for context menu
-    public class ModernMenuRenderer : ToolStripProfessionalRenderer
-    {
-        public ModernMenuRenderer() : base(new ModernColorTable()) { }
-
-        protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
-        {
-            if (e.Item.Selected)
-            {
-                var rect = new Rectangle(System.Drawing.Point.Empty, e.Item.Size);
-                using (var brush = new SolidBrush(System.Drawing.Color.FromArgb(60, 60, 60)))
-                {
-                    e.Graphics.FillRectangle(brush, rect);
-                }
-            }
-            else
-            {
-                base.OnRenderMenuItemBackground(e);
-            }
-        }
-
-        protected override void OnRenderSeparator(ToolStripSeparatorRenderEventArgs e)
-        {
-            var rect = new Rectangle(30, 0, e.Item.Width - 30, 1);
-            using (var pen = new Pen(System.Drawing.Color.FromArgb(60, 60, 60)))
-            {
-                e.Graphics.DrawLine(pen, rect.Left, rect.Top, rect.Right, rect.Top);
-            }
-        }
-    }
-
-    public class ModernColorTable : ProfessionalColorTable
-    {
-        public override System.Drawing.Color MenuItemSelected => System.Drawing.Color.FromArgb(60, 60, 60);
-        public override System.Drawing.Color MenuItemSelectedGradientBegin => System.Drawing.Color.FromArgb(60, 60, 60);
-        public override System.Drawing.Color MenuItemSelectedGradientEnd => System.Drawing.Color.FromArgb(60, 60, 60);
-        public override System.Drawing.Color MenuItemBorder => System.Drawing.Color.FromArgb(60, 60, 60);
-        public override System.Drawing.Color MenuBorder => System.Drawing.Color.FromArgb(45, 45, 45);
-        public override System.Drawing.Color ImageMarginGradientBegin => System.Drawing.Color.FromArgb(32, 32, 32);
-        public override System.Drawing.Color ImageMarginGradientMiddle => System.Drawing.Color.FromArgb(32, 32, 32);
-        public override System.Drawing.Color ImageMarginGradientEnd => System.Drawing.Color.FromArgb(32, 32, 32);
     }
 }

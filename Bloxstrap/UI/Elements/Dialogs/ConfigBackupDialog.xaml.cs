@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Text.Json;
 using System.Windows;
@@ -9,11 +9,11 @@ namespace Voidstrap.UI.Elements.Dialogs
 {
     /// <summary>
     /// Configuration Backup and Restore Dialog
-    /// Allows users to export and import complete Bloodstrap configurations
+    /// Allows users to export and import complete GalaxyStrap configurations
     /// </summary>
     public partial class ConfigBackupDialog : WpfUiWindow
     {
-        private const string ConfigFileFilter = "Bloodstrap Config Files (*.bloodconfig)|*.bloodconfig|JSON Files (*.json)|*.json|All Files (*.*)|*.*";
+        private const string ConfigFileFilter = "GalaxyStrap Config Files (*.bloodconfig)|*.bloodconfig|JSON Files (*.json)|*.json|All Files (*.*)|*.*";
         private const string DefaultConfigExtension = ".bloodconfig";
 
         // Export toggle states
@@ -37,7 +37,7 @@ namespace Voidstrap.UI.Elements.Dialogs
         {
             try
             {
-                string backupFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Bloodstrap", "Backups");
+                string backupFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "GalaxyStrap", "Backups");
                 if (Directory.Exists(backupFolder))
                 {
                     var files = Directory.GetFiles(backupFolder, "*" + DefaultConfigExtension);
@@ -63,8 +63,8 @@ namespace Voidstrap.UI.Elements.Dialogs
                 {
                     Filter = ConfigFileFilter,
                     DefaultExt = DefaultConfigExtension,
-                    FileName = $"BloodstrapConfig_{DateTime.Now:yyyyMMdd_HHmmss}{DefaultConfigExtension}",
-                    Title = "Export Bloodstrap Configuration"
+                    FileName = $"GalaxyStrapConfig_{DateTime.Now:yyyyMMdd_HHmmss}{DefaultConfigExtension}",
+                    Title = "Export GalaxyStrap Configuration"
                 };
 
                 if (saveDialog.ShowDialog() != true)
@@ -72,10 +72,10 @@ namespace Voidstrap.UI.Elements.Dialogs
 
                 StatusText.Text = "Exporting configuration...";
 
-                var config = new BloodstrapConfig
+                var config = new GalaxyStrapConfig
                 {
                     ExportDate = DateTime.Now,
-                    Version = "0.0.5",
+                    Version = "1.5.0",
                     IncludeFastFlags = IncludeFastFlags,
                     IncludeSettings = IncludeSettings,
                     IncludeMods = IncludeMods,
@@ -170,7 +170,7 @@ namespace Voidstrap.UI.Elements.Dialogs
                 {
                     Filter = ConfigFileFilter,
                     DefaultExt = DefaultConfigExtension,
-                    Title = "Import Bloodstrap Configuration"
+                    Title = "Import GalaxyStrap Configuration"
                 };
 
                 if (openDialog.ShowDialog() != true)
@@ -186,7 +186,7 @@ namespace Voidstrap.UI.Elements.Dialogs
                 StatusText.Text = "Importing configuration...";
 
                 string json = File.ReadAllText(openDialog.FileName);
-                var config = JsonSerializer.Deserialize<BloodstrapConfig>(json, new JsonSerializerOptions
+                var config = JsonSerializer.Deserialize<GalaxyStrapConfig>(json, new JsonSerializerOptions
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                     PropertyNameCaseInsensitive = true
@@ -226,7 +226,7 @@ namespace Voidstrap.UI.Elements.Dialogs
                 StatusText.Text = $"✅ Configuration imported successfully from: {Path.GetFileName(openDialog.FileName)}";
                 
                 var result = System.Windows.MessageBox.Show(
-                    $"Configuration imported successfully!\n\nSome changes may require restarting Bloodstrap.\n\nRestart now?",
+                    $"Configuration imported successfully!\n\nSome changes may require restarting GalaxyStrap.\n\nRestart now?",
                     "Import Complete",
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Information);
@@ -253,15 +253,15 @@ namespace Voidstrap.UI.Elements.Dialogs
         {
             try
             {
-                string backupFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Bloodstrap", "Backups");
+                string backupFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "GalaxyStrap", "Backups");
                 Directory.CreateDirectory(backupFolder);
 
                 string backupFile = Path.Combine(backupFolder, $"AutoBackup_{DateTime.Now:yyyyMMdd_HHmmss}{DefaultConfigExtension}");
 
-                var config = new BloodstrapConfig
+                var config = new GalaxyStrapConfig
                 {
                     ExportDate = DateTime.Now,
-                    Version = "0.0.5",
+                    Version = "1.5.0",
                     IncludeFastFlags = true,
                     IncludeSettings = true,
                     IncludeMods = true,
@@ -358,10 +358,10 @@ namespace Voidstrap.UI.Elements.Dialogs
     }
 
     // Configuration data structure
-    public class BloodstrapConfig
+    public class GalaxyStrapConfig
     {
         public DateTime ExportDate { get; set; }
-        public string Version { get; set; } = "0.0.5";
+        public string Version { get; set; } = "1.5.0";
         public bool IncludeFastFlags { get; set; }
         public bool IncludeSettings { get; set; }
         public bool IncludeMods { get; set; }

@@ -1,4 +1,4 @@
-<base:WpfUiWindow x:Class="Voidstrap.UI.Elements.ContextMenu.BadgesViewer"
+﻿<base:WpfUiWindow x:Class="Voidstrap.UI.Elements.ContextMenu.BadgesViewer"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -37,7 +37,7 @@
                      ShowMinimize="True"
                      ShowMaximize="False"
                      CanMaximize="False"
-                     Icon="pack://application:,,,/Bloodstrap.ico" />
+                     Icon="pack://application:,,,/GalaxyStrap.ico" />
 
         <TextBlock Grid.Row="1"
                    Margin="16,8,16,0"

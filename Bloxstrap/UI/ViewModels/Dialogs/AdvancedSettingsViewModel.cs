@@ -1,4 +1,4 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace Voidstrap.UI.ViewModels.Dialogs
 {
@@ -9,7 +9,7 @@ namespace Voidstrap.UI.ViewModels.Dialogs
         public static event EventHandler? ShowFlagCountChanged;
         public event EventHandler? ShowAddWithIDChanged;
 
-        // Placeholder properties - these would need to be connected to actual Bloodstrap Settings
+        // Placeholder properties - these would need to be connected to actual GalaxyStrap Settings
         private bool _showCtrlCJsonFormat;
         private bool _showPresetColumn;
         private bool _showFlagCount;

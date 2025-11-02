@@ -1,4 +1,4 @@
-﻿namespace Voidstrap.Enums
+namespace Voidstrap.Enums
 {
     public enum Theme
     {
@@ -7,6 +7,7 @@
         Dark,
         Light,
         Voidstrap,
+        Galaxy,
         UltraGray,
         Berry,
         Blue,

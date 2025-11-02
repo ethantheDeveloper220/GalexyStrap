@@ -1,4 +1,4 @@
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 
@@ -17,7 +17,7 @@ namespace Voidstrap.Helpers
             {
                 var payload = new
                 {
-                    username = string.IsNullOrWhiteSpace(username) ? "Bloodstrap" : username,
+                    username = string.IsNullOrWhiteSpace(username) ? "GalaxyStrap" : username,
                     embeds = new[]
                     {
                         new
@@ -28,7 +28,7 @@ namespace Voidstrap.Helpers
                             timestamp = DateTime.UtcNow.ToString("o"),
                             footer = new
                             {
-                                text = "Bloodstrap v1.3.0"
+                                text = "GalaxyStrap v1.3.0"
                             }
                         }
                     }

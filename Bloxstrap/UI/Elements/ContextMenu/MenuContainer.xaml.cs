@@ -1,9 +1,14 @@
 ﻿using System.Diagnostics;
+using System.Net.Http;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Threading;
 using Voidstrap.Integrations;
+using Voidstrap.UI.Elements.Dialogs;
+using Voidstrap.UI.Elements.Settings;
 using Windows.Win32;
 using Windows.Win32.Foundation;
 using Windows.Win32.UI.WindowsAndMessaging;
@@ -35,13 +40,19 @@ namespace Voidstrap.UI.Elements.ContextMenu
 
         private ChatLogs? _ChatLogs;
 
+        private PerformanceMonitor.PerformanceMonitorWindow? _performanceMonitorWindow;
+
+        private PerformanceMonitor.PerformanceOverlay? _performanceOverlay;
+
         private TimeSpan playTime = TimeSpan.Zero;
         private DispatcherTimer playTimer;
+        private DispatcherTimer statusTimer;
 
         public MenuContainer(Watcher watcher)
         {
             InitializeComponent();
             StartPlayTimeTimer();
+            StartRobloxStatusChecker();
             _watcher = watcher;
 
             if (_activityWatcher is not null)
@@ -281,6 +292,182 @@ namespace Voidstrap.UI.Elements.ContextMenu
                 _ChatLogs.ShowDialog();
             else
                 _ChatLogs.Activate();
+        }
+
+        private void PerformanceMonitorMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (_performanceMonitorWindow is null)
+            {
+                _performanceMonitorWindow = new PerformanceMonitor.PerformanceMonitorWindow();
+                _performanceMonitorWindow.Closed += (_, _) => _performanceMonitorWindow = null;
+            }
+
+            if (!_performanceMonitorWindow.IsVisible)
+                _performanceMonitorWindow.Show();
+            else
+                _performanceMonitorWindow.Activate();
+        }
+
+        private void PerformanceOverlayMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (_performanceOverlay is null)
+            {
+                _performanceOverlay = new PerformanceMonitor.PerformanceOverlay();
+                _performanceOverlay.Closed += (_, _) => _performanceOverlay = null;
+                _performanceOverlay.Show();
+            }
+            else
+            {
+                _performanceOverlay.Close();
+                _performanceOverlay = null;
+            }
+        }
+
+        private void WebhookManagerMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var webhookManager = new WebhookManagerDialog();
+            webhookManager.Show();
+        }
+
+        private void ShowSettingsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            // Check if settings window is already open
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window is MainWindow mainWindow)
+                {
+                    mainWindow.Activate();
+                    mainWindow.WindowState = System.Windows.WindowState.Normal;
+                    return;
+                }
+            }
+
+            // If not open, create new settings window
+            var settingsWindow = new MainWindow(false);
+            settingsWindow.Show();
+        }
+
+        private void ExitGalaxyStrapMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = Frontend.ShowMessageBox(
+                "Are you sure you want to exit GalaxyStrap?",
+                MessageBoxImage.Question,
+                MessageBoxButton.YesNo
+            );
+
+            if (result != MessageBoxResult.Yes)
+                return;
+
+            App.Terminate();
+        }
+
+        // Roblox Status Checker
+        private void StartRobloxStatusChecker()
+        {
+            statusTimer = new DispatcherTimer();
+            statusTimer.Interval = TimeSpan.FromMinutes(2); // Check every 2 minutes
+            statusTimer.Tick += async (s, e) => await CheckRobloxStatus();
+            statusTimer.Start();
+
+            // Check immediately on startup
+            Task.Run(async () => await CheckRobloxStatus());
+        }
+
+        private async Task CheckRobloxStatus()
+        {
+            try
+            {
+                using var client = new HttpClient();
+                client.Timeout = TimeSpan.FromSeconds(10);
+
+                // Use Roblox Status API
+                var response = await client.GetAsync("https://status.roblox.com/api/v2/status");
+                
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    var statusData = JsonSerializer.Deserialize<RobloxStatusResponse>(json);
+
+                    Dispatcher.Invoke(() =>
+                    {
+                        if (statusData?.status?.indicator == "none")
+                        {
+                            RobloxStatusText.Text = "Roblox Status: ✅ All Systems Operational";
+                            RobloxStatusText.Foreground = Brushes.Green;
+                            RobloxStatusIcon.Foreground = Brushes.Green;
+                        }
+                        else if (statusData?.status?.indicator == "minor")
+                        {
+                            RobloxStatusText.Text = $"Roblox Status: ⚠️ {statusData.status.description}";
+                            RobloxStatusText.Foreground = Brushes.Orange;
+                            RobloxStatusIcon.Foreground = Brushes.Orange;
+                        }
+                        else if (statusData?.status?.indicator == "major" || statusData?.status?.indicator == "critical")
+                        {
+                            RobloxStatusText.Text = $"Roblox Status: ❌ {statusData.status.description}";
+                            RobloxStatusText.Foreground = Brushes.Red;
+                            RobloxStatusIcon.Foreground = Brushes.Red;
+                        }
+                        else
+                        {
+                            RobloxStatusText.Text = "Roblox Status: ⚠️ Unknown";
+                            RobloxStatusText.Foreground = Brushes.Gray;
+                            RobloxStatusIcon.Foreground = Brushes.Gray;
+                        }
+                    });
+                }
+                else
+                {
+                    Dispatcher.Invoke(() =>
+                    {
+                        RobloxStatusText.Text = "Roblox Status: ❌ Unable to check";
+                        RobloxStatusText.Foreground = Brushes.Gray;
+                        RobloxStatusIcon.Foreground = Brushes.Gray;
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                App.Logger.WriteLine("MenuContainer::CheckRobloxStatus", $"Failed to check Roblox status: {ex.Message}");
+                Dispatcher.Invoke(() =>
+                {
+                    RobloxStatusText.Text = "Roblox Status: ⚠️ Check failed";
+                    RobloxStatusText.Foreground = Brushes.Gray;
+                    RobloxStatusIcon.Foreground = Brushes.Gray;
+                });
+            }
+        }
+
+        private void RobloxStatusMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            // Refresh status on click
+            Task.Run(async () => await CheckRobloxStatus());
+            
+            // Open Roblox status page
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "https://status.roblox.com",
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                App.Logger.WriteLine("MenuContainer::RobloxStatusMenuItem_Click", $"Failed to open status page: {ex.Message}");
+            }
+        }
+
+        // Data models for Roblox Status API
+        private class RobloxStatusResponse
+        {
+            public StatusInfo? status { get; set; }
+        }
+
+        private class StatusInfo
+        {
+            public string? indicator { get; set; }
+            public string? description { get; set; }
         }
     }
 }

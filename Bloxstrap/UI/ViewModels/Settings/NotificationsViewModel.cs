@@ -1,4 +1,4 @@
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using System.Windows;
 using System.Windows.Forms;
 using System.ComponentModel;
@@ -68,7 +68,7 @@ namespace Voidstrap.UI.ViewModels.Settings
             }
         }
 
-        // Bloodstrap Event Notifications
+        // GalaxyStrap Event Notifications
         public bool NotifyOnSettingsSaved
         {
             get => App.Settings.Prop.NotifyOnSettingsSaved;
@@ -89,12 +89,12 @@ namespace Voidstrap.UI.ViewModels.Settings
             }
         }
 
-        public bool NotifyOnBloodstrapUpdate
+        public bool NotifyOnGalaxyStrapUpdate
         {
-            get => App.Settings.Prop.NotifyOnBloodstrapUpdate;
+            get => App.Settings.Prop.NotifyOnGalaxyStrapUpdate;
             set
             {
-                App.Settings.Prop.NotifyOnBloodstrapUpdate = value;
+                App.Settings.Prop.NotifyOnGalaxyStrapUpdate = value;
                 OnPropertyChanged();
             }
         }

@@ -1,4 +1,4 @@
-// To debug the automatic updater:
+﻿// To debug the automatic updater:
 // - Uncomment the definition below
 // - Publish the executable
 // - Launch the executable (click no when it asks you to upgrade)
@@ -198,7 +198,7 @@ namespace Voidstrap
             if (connectionResult is not null)
                 await HandleConnectionError(connectionResult);
 
-// AUTO-UPDATE DISABLED FOR BLOODSTRAP
+// AUTO-UPDATE DISABLED FOR GalaxyStrap
 #if false && (!DEBUG || DEBUG_UPDATER) && !QA_BUILD
             if (App.Settings.Prop.CheckForUpdates && !App.LaunchSettings.UpgradeFlag.Active)
             {
@@ -2041,8 +2041,9 @@ namespace Voidstrap
                     continue;
                 }
 
-                if (!App.Settings.Prop.UseFastFlagManager && String.Equals(relativeFile, "ClientSettings\\ClientAppSettings.json", StringComparison.OrdinalIgnoreCase))
-                    continue;
+                // Always apply FastFlags - removed UseFastFlagManager check
+                // if (!App.Settings.Prop.UseFastFlagManager && String.Equals(relativeFile, "ClientSettings\\ClientAppSettings.json", StringComparison.OrdinalIgnoreCase))
+                //     continue;
 
                 if (relativeFile.EndsWith(".lock"))
                     continue;
@@ -2051,6 +2052,13 @@ namespace Voidstrap
 
                 string fileModFolder = Path.Combine(Paths.Mods, relativeFile);
                 string fileVersionFolder = Path.Combine(_latestVersionDirectory, relativeFile);
+
+                // Special logging for FastFlags
+                if (String.Equals(relativeFile, "ClientSettings\\ClientAppSettings.json", StringComparison.OrdinalIgnoreCase))
+                {
+                    App.Logger.WriteLine(LOG_IDENT, $"Applying FastFlags from: {fileModFolder}");
+                    App.Logger.WriteLine(LOG_IDENT, $"FastFlags destination: {fileVersionFolder}");
+                }
 
                 if (File.Exists(fileVersionFolder) && MD5Hash.FromFile(fileModFolder) == MD5Hash.FromFile(fileVersionFolder))
                 {

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Text.Json;
 using System.Windows;
@@ -13,7 +13,7 @@ namespace Voidstrap.UI.Elements.Settings.Pages
     /// </summary>
     public partial class BackupPage : UiPage
     {
-        private const string ConfigFileFilter = "Bloodstrap Config Files (*.bloodconfig)|*.bloodconfig|JSON Files (*.json)|*.json|All Files (*.*)|*.*";
+        private const string ConfigFileFilter = "GalaxyStrap Config Files (*.bloodconfig)|*.bloodconfig|JSON Files (*.json)|*.json|All Files (*.*)|*.*";
         private const string DefaultConfigExtension = ".bloodconfig";
 
         // Export toggle states
@@ -37,7 +37,7 @@ namespace Voidstrap.UI.Elements.Settings.Pages
         {
             try
             {
-                string backupFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Bloodstrap", "Backups");
+                string backupFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "GalaxyStrap", "Backups");
                 if (Directory.Exists(backupFolder))
                 {
                     var files = Directory.GetFiles(backupFolder, "*" + DefaultConfigExtension);
@@ -63,8 +63,8 @@ namespace Voidstrap.UI.Elements.Settings.Pages
                 {
                     Filter = ConfigFileFilter,
                     DefaultExt = DefaultConfigExtension,
-                    FileName = $"BloodstrapConfig_{DateTime.Now:yyyyMMdd_HHmmss}{DefaultConfigExtension}",
-                    Title = "Export Bloodstrap Configuration"
+                    FileName = $"GalaxyStrapConfig_{DateTime.Now:yyyyMMdd_HHmmss}{DefaultConfigExtension}",
+                    Title = "Export GalaxyStrap Configuration"
                 };
 
                 if (saveDialog.ShowDialog() != true)
@@ -72,10 +72,10 @@ namespace Voidstrap.UI.Elements.Settings.Pages
 
                 StatusText.Text = "Exporting configuration...";
 
-                var config = new BloodstrapConfig
+                var config = new GalaxyStrapConfig
                 {
                     ExportDate = DateTime.Now,
-                    Version = "0.0.5",
+                    Version = "1.5.0",
                     IncludeFastFlags = IncludeFastFlags,
                     IncludeSettings = IncludeSettings,
                     IncludeMods = IncludeMods,
@@ -166,7 +166,7 @@ namespace Voidstrap.UI.Elements.Settings.Pages
                 {
                     Filter = ConfigFileFilter,
                     DefaultExt = DefaultConfigExtension,
-                    Title = "Import Bloodstrap Configuration"
+                    Title = "Import GalaxyStrap Configuration"
                 };
 
                 if (openDialog.ShowDialog() != true)
@@ -182,7 +182,7 @@ namespace Voidstrap.UI.Elements.Settings.Pages
                 StatusText.Text = "Importing configuration...";
 
                 string json = File.ReadAllText(openDialog.FileName);
-                var config = JsonSerializer.Deserialize<BloodstrapConfig>(json, new JsonSerializerOptions
+                var config = JsonSerializer.Deserialize<GalaxyStrapConfig>(json, new JsonSerializerOptions
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                     PropertyNameCaseInsensitive = true
@@ -222,7 +222,7 @@ namespace Voidstrap.UI.Elements.Settings.Pages
                 StatusText.Text = $"Configuration imported successfully from: {Path.GetFileName(openDialog.FileName)}";
                 
                 var result = System.Windows.MessageBox.Show(
-                    $"Configuration imported successfully!\n\nSome changes may require restarting Bloodstrap.\n\nRestart now?",
+                    $"Configuration imported successfully!\n\nSome changes may require restarting GalaxyStrap.\n\nRestart now?",
                     "Import Complete",
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Information);
@@ -249,15 +249,15 @@ namespace Voidstrap.UI.Elements.Settings.Pages
         {
             try
             {
-                string backupFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Bloodstrap", "Backups");
+                string backupFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "GalaxyStrap", "Backups");
                 Directory.CreateDirectory(backupFolder);
 
                 string backupFile = Path.Combine(backupFolder, $"AutoBackup_{DateTime.Now:yyyyMMdd_HHmmss}{DefaultConfigExtension}");
 
-                var config = new BloodstrapConfig
+                var config = new GalaxyStrapConfig
                 {
                     ExportDate = DateTime.Now,
-                    Version = "0.0.5",
+                    Version = "1.5.0",
                     IncludeFastFlags = true,
                     IncludeSettings = true,
                     IncludeMods = true,
@@ -318,13 +318,121 @@ namespace Voidstrap.UI.Elements.Settings.Pages
         {
             // Import themes
         }
+
+        // Roblox Repair Tools
+        private void FixRobloxDLL_Click(object sender, RoutedEventArgs e)
+        {
+            var result = System.Windows.MessageBox.Show(
+                "This will reinstall Roblox without launching it. This fixes corrupted DLL files.\n\nContinue?",
+                "Fix RobloxPlayerBeta.dll",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    StatusText.Text = "Reinstalling Roblox...";
+                    
+                    // Delete Roblox version folder to force reinstall
+                    string robloxVersions = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "GalaxyStrap", "RblxVersions");
+                    if (Directory.Exists(robloxVersions))
+                    {
+                        Directory.Delete(robloxVersions, true);
+                    }
+
+                    StatusText.Text = "✅ Roblox will be reinstalled on next launch";
+                    System.Windows.MessageBox.Show(
+                        "Roblox will be reinstalled when you next launch a game.\n\nThe corrupted files have been removed.",
+                        "Success",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    StatusText.Text = $"❌ Failed to fix Roblox: {ex.Message}";
+                    System.Windows.MessageBox.Show(
+                        $"Failed to fix Roblox:\n\n{ex.Message}",
+                        "Error",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void ResetAllData_Click(object sender, RoutedEventArgs e)
+        {
+            var result = System.Windows.MessageBox.Show(
+                "⚠️ WARNING: This will completely reset GalaxyStrap and Roblox!\n\n" +
+                "This will delete:\n" +
+                "• All GalaxyStrap settings\n" +
+                "• All FastFlags\n" +
+                "• All mods and themes\n" +
+                "• All Roblox installations\n" +
+                "• All saved configurations\n\n" +
+                "This action CANNOT be undone!\n\n" +
+                "Are you absolutely sure?",
+                "Reset All Data",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                var confirmResult = System.Windows.MessageBox.Show(
+                    "Last chance! This will delete EVERYTHING.\n\nProceed with full reset?",
+                    "Final Confirmation",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Stop);
+
+                if (confirmResult == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        StatusText.Text = "Resetting all data...";
+
+                        // Delete GalaxyStrap folder
+                        string GalaxyStrapPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "GalaxyStrap");
+                        if (Directory.Exists(GalaxyStrapPath))
+                        {
+                            Directory.Delete(GalaxyStrapPath, true);
+                        }
+
+                        // Delete Roblox folder
+                        string robloxPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Roblox");
+                        if (Directory.Exists(robloxPath))
+                        {
+                            Directory.Delete(robloxPath, true);
+                        }
+
+                        StatusText.Text = "✅ All data has been reset";
+                        System.Windows.MessageBox.Show(
+                            "All data has been reset successfully.\n\nGalaxyStrap will now close. Please restart it to set up again.",
+                            "Reset Complete",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Information);
+
+                        // Close application
+                        System.Windows.Application.Current.Shutdown();
+                    }
+                    catch (Exception ex)
+                    {
+                        StatusText.Text = $"❌ Failed to reset data: {ex.Message}";
+                        System.Windows.MessageBox.Show(
+                            $"Failed to reset data:\n\n{ex.Message}",
+                            "Error",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                    }
+                }
+            }
+        }
     }
 
     // Configuration data structure
-    public class BloodstrapConfig
+    public class GalaxyStrapConfig
     {
         public DateTime ExportDate { get; set; }
-        public string Version { get; set; } = "0.0.5";
+        public string Version { get; set; } = "1.5.0";
         public bool IncludeFastFlags { get; set; }
         public bool IncludeSettings { get; set; }
         public bool IncludeMods { get; set; }

@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Forms;
 using MessageBox = System.Windows.MessageBox;
 
@@ -170,9 +170,9 @@ namespace Voidstrap.Helpers
             }
         }
 
-        public static void NotifyBloodstrapUpdate(string version)
+        public static void NotifyGalaxyStrapUpdate(string version)
         {
-            if (App.Settings.Prop.NotifyOnBloodstrapUpdate)
+            if (App.Settings.Prop.NotifyOnGalaxyStrapUpdate)
             {
                 ShowNotification(
                     $"{ProjectInfo.PROJECT_NAME} - Update Available",

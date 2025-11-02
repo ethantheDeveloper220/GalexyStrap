@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.IO;
 using System.Net.Http;
@@ -189,7 +189,7 @@ namespace Voidstrap.UI.ViewModels.Settings
             try
             {
                 string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                string folderPath = Path.Combine(documentsPath, "Bloodstrap");
+                string folderPath = Path.Combine(documentsPath, "GalaxyStrap");
                 string privateCodePath = Path.Combine(folderPath, "PrivateServerCode.txt");
 
                 if (File.Exists(privateCodePath))

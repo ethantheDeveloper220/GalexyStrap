@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -22,7 +22,7 @@ namespace Voidstrap.UI.Elements.Settings.Pages
     {
         private readonly string instanceFilePath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-            "Bloodstrap",
+            "GalaxyStrap",
             "instance_id.txt"
         );
 
@@ -87,7 +87,7 @@ namespace Voidstrap.UI.Elements.Settings.Pages
                 {
                     string folderPath = Path.Combine(
                         Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                        "Bloodstrap"
+                        "GalaxyStrap"
                     );
                     Directory.CreateDirectory(folderPath);
                     string privateCodePath = Path.Combine(folderPath, "PrivateServerCode.txt");
@@ -262,7 +262,7 @@ namespace Voidstrap.UI.Elements.Settings.Pages
 
                 string folder = Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                    "Bloodstrap",
+                    "GalaxyStrap",
                     "Icons"
                 );
                 Directory.CreateDirectory(folder);

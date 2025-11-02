@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO;
 using Voidstrap.Enums;
 using Voidstrap.UI.Elements.Dialogs;
@@ -129,13 +129,13 @@ namespace Voidstrap.Models.Persistable
         public bool NotifyOnUpdate { get; set; } = true;
         public bool NotifyOnSettingsSaved { get; set; } = true;
         public bool NotifyOnErrors { get; set; } = true;
-        public bool NotifyOnBloodstrapUpdate { get; set; } = true;
+        public bool NotifyOnGalaxyStrapUpdate { get; set; } = true;
         public int TrayTipDuration { get; set; } = 5;
         public bool PlayNotificationSound { get; set; } = true;
 
         // Webhook Settings (Legacy - kept for backwards compatibility)
         public string WebhookUrl { get; set; } = "";
-        public string WebhookUsername { get; set; } = "Bloodstrap";
+        public string WebhookUsername { get; set; } = "GalaxyStrap";
         public bool WebhookOnGameLaunch { get; set; } = false;
         public bool WebhookOnGameClose { get; set; } = false;
         public bool WebhookOnUpdate { get; set; } = false;
@@ -143,6 +143,42 @@ namespace Voidstrap.Models.Persistable
 
         // New Webhook Manager Configuration
         public WebhookConfig? WebhookConfig { get; set; } = null;
+
+        // Region & Server Settings
+        public bool EnableRegionSelection { get; set; } = false;
+        public string PreferredServerRegion { get; set; } = "auto";
+        public bool EnableAutoSelectBestServer { get; set; } = false;
+        public int MaxPingThreshold { get; set; } = 100;
+        public bool ShowPingInGame { get; set; } = false;
+        public bool ReduceNetworkLag { get; set; } = false;
+        public bool IncreaseBandwidth { get; set; } = false;
+        public bool OptimizePacketSize { get; set; } = false;
+        public bool EnableFastPreloading { get; set; } = false;
+
+        // Performance Monitor Settings
+        public bool EnablePerformanceMonitor { get; set; } = true;
+        public bool AutoStartPerformanceMonitor { get; set; } = false;
+        public bool PerformanceMonitorAlwaysOnTop { get; set; } = false;
+        public int PerformanceMonitorUpdateInterval { get; set; } = 500;
+        
+        // Display Options
+        public bool ShowCpuUsage { get; set; } = true;
+        public bool ShowMemoryUsage { get; set; } = true;
+        public bool ShowFps { get; set; } = true;
+        public bool ShowPing { get; set; } = true;
+        public bool ShowGpuUsage { get; set; } = true;
+        public bool ShowDiskActivity { get; set; } = true;
+        
+        // Performance Alerts
+        public bool EnablePerformanceAlerts { get; set; } = false;
+        public int CpuAlertThreshold { get; set; } = 80;
+        public int MemoryAlertThreshold { get; set; } = 8000;
+        public int FpsAlertThreshold { get; set; } = 30;
+        
+        // Performance Logging
+        public bool EnablePerformanceLogging { get; set; } = false;
+        public int PerformanceLogInterval { get; set; } = 30;
+        public bool AutoDeleteOldPerformanceLogs { get; set; } = true;
     }
 
     public class ExternalTool

@@ -1,4 +1,4 @@
-using DiscordRPC;
+﻿using DiscordRPC;
 using DiscordRPC.Logging;
 using Microsoft.Win32;
 using System.Reflection;
@@ -183,7 +183,7 @@ namespace Voidstrap
                 Logger.WriteLine(LOG_IDENT, $"Detected unsupported Windows version ({Environment.OSVersion.Version}).");
 
                 if (!LaunchSettings.QuietFlag.Active)
-                    Frontend.ShowMessageBox("Your Windows Version is not supported with Bloodstrap!", MessageBoxImage.Error);
+                    Frontend.ShowMessageBox("Your Windows Version is not supported with GalaxyStrap!", MessageBoxImage.Error);
 
                 Terminate(ErrorCode.ERROR_INVALID_FUNCTION);
             }

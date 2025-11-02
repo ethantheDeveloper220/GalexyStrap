@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -90,7 +90,7 @@ namespace Voidstrap.UI.Elements.ActivityLogger
             var dialog = new SaveFileDialog
             {
                 Filter = "Text Files (*.txt)|*.txt|Log Files (*.log)|*.log|All Files (*.*)|*.*",
-                FileName = $"Bloodstrap_ActivityLog_{DateTime.Now:yyyyMMdd_HHmmss}.txt"
+                FileName = $"GalaxyStrap_ActivityLog_{DateTime.Now:yyyyMMdd_HHmmss}.txt"
             };
 
             if (dialog.ShowDialog() == true)
@@ -99,7 +99,7 @@ namespace Voidstrap.UI.Elements.ActivityLogger
                 {
                     using (var writer = new StreamWriter(dialog.FileName))
                     {
-                        writer.WriteLine($"Bloodstrap Activity Log");
+                        writer.WriteLine($"GalaxyStrap Activity Log");
                         writer.WriteLine($"Generated: {DateTime.Now}");
                         writer.WriteLine($"Total Events: {_allLogs.Count}");
                         writer.WriteLine(new string('=', 80));

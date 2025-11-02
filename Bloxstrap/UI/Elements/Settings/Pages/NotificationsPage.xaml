@@ -1,4 +1,4 @@
-<ui:UiPage
+﻿<ui:UiPage
     x:Class="Voidstrap.UI.Elements.Settings.Pages.NotificationsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -24,7 +24,7 @@
             Margin="0,2,0,0"
             FontSize="13"
             Foreground="{StaticResource TextFillColorSecondaryBrush}"
-            Text="Configure how Bloodstrap notifies you about events and updates."
+            Text="Configure how GalaxyStrap notifies you about events and updates."
             TextWrapping="Wrap" />
 
         <!-- Notification Type Selection -->
@@ -142,11 +142,11 @@
             </ui:CardExpander.Content>
         </ui:CardExpander>
 
-        <!-- Bloodstrap Events -->
+        <!-- GalaxyStrap Events -->
         <ui:CardExpander
             Margin="0,8,0,0"
             Icon="Alert24"
-            Header="Bloodstrap Events">
+            Header="GalaxyStrap Events">
             <ui:CardExpander.Content>
                 <StackPanel Margin="16">
                     <ui:CardControl Icon="Checkmark24">
@@ -178,14 +178,14 @@
                     <ui:CardControl Margin="0,8,0,0" Icon="ArrowSync24">
                         <ui:CardControl.Header>
                             <StackPanel>
-                                <TextBlock FontWeight="Medium" Text="Bloodstrap Updates" />
+                                <TextBlock FontWeight="Medium" Text="GalaxyStrap Updates" />
                                 <TextBlock
                                     FontSize="12"
                                     Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                                    Text="Notify when Bloodstrap updates are available" />
+                                    Text="Notify when GalaxyStrap updates are available" />
                             </StackPanel>
                         </ui:CardControl.Header>
-                        <ui:ToggleSwitch IsChecked="{Binding NotifyOnBloodstrapUpdate, Mode=TwoWay}" />
+                        <ui:ToggleSwitch IsChecked="{Binding NotifyOnGalaxyStrapUpdate, Mode=TwoWay}" />
                     </ui:CardControl>
                 </StackPanel>
             </ui:CardExpander.Content>

@@ -1,0 +1,175 @@
+<ui:UiPage
+    x:Class="Voidstrap.UI.Elements.Settings.Pages.RegionPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:controls="clr-namespace:Voidstrap.UI.Elements.Controls"
+    Title="Region &amp; Server"
+    Scrollable="True"
+    d:DesignHeight="800"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <StackPanel Margin="0,0,14,14">
+        <!-- Page Header -->
+        <TextBlock FontSize="28" FontWeight="Bold" Text="Region &amp; Server Selection" Margin="0,0,0,8"/>
+        <TextBlock FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Margin="0,0,0,24">
+            Optimize your connection by selecting the best server region for lowest ping and lag.
+        </TextBlock>
+
+        <!-- Server Region Selection -->
+        <ui:CardExpander Margin="0,0,0,16" IsExpanded="True">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="14" Text="Server Region Selection" />
+                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="Choose your preferred Roblox server region" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+            
+            <StackPanel>
+                <controls:OptionControl Header="Enable Region Selection" 
+                                       Description="Force Roblox to connect to specific server regions">
+                    <ui:ToggleSwitch IsChecked="{Binding EnableRegionSelection, Mode=TwoWay}"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Preferred Region" 
+                                       Description="Select the region closest to you for best performance">
+                    <ComboBox Width="250"
+                             Margin="5,0,0,0"
+                             Padding="10,5,10,5"
+                             ItemsSource="{Binding AvailableRegions}"
+                             SelectedItem="{Binding SelectedRegion, Mode=TwoWay}"
+                             IsEnabled="{Binding EnableRegionSelection}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </controls:OptionControl>
+
+                <Border Background="{DynamicResource ControlFillColorDefaultBrush}" 
+                       CornerRadius="8" 
+                       Padding="12" 
+                       Margin="0,12,0,0">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                            <ui:SymbolIcon Symbol="Info24" FontSize="16" Foreground="#0078D4" Margin="0,0,8,0"/>
+                            <TextBlock Text="Region Info" FontWeight="SemiBold" FontSize="13"/>
+                        </StackPanel>
+                        <TextBlock x:Name="RegionInfoText" 
+                                  Text="Select a region to see details" 
+                                  FontSize="12" 
+                                  TextWrapping="Wrap"
+                                  Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ui:CardExpander>
+
+        <!-- Auto-Select Best Server -->
+        <ui:CardExpander Margin="0,0,0,16" IsExpanded="True">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="14" Text="Auto-Select Best Server" />
+                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="Automatically connect to the lowest ping server" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+            
+            <StackPanel>
+                <controls:OptionControl Header="Enable Auto-Select" 
+                                       Description="Automatically find and connect to the server with lowest ping">
+                    <ui:ToggleSwitch IsChecked="{Binding EnableAutoSelectBestServer, Mode=TwoWay}"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Max Ping Threshold (ms)" 
+                                       Description="Only connect to servers below this ping (default: 100ms)">
+                    <StackPanel Orientation="Horizontal">
+                        <Slider Minimum="50" 
+                               Maximum="300" 
+                               Width="200"
+                               Value="{Binding MaxPingThreshold, Mode=TwoWay}"
+                               TickFrequency="25"
+                               IsSnapToTickEnabled="True"
+                               Margin="0,0,12,0"
+                               IsEnabled="{Binding EnableAutoSelectBestServer}"/>
+                        <TextBlock Text="{Binding MaxPingThreshold, StringFormat={}{0} ms}" 
+                                  FontWeight="SemiBold"
+                                  VerticalAlignment="Center"
+                                  MinWidth="60"/>
+                    </StackPanel>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Show Ping in Game" 
+                                       Description="Display current server ping in the Roblox client">
+                    <ui:ToggleSwitch IsChecked="{Binding ShowPingInGame, Mode=TwoWay}"/>
+                </controls:OptionControl>
+            </StackPanel>
+        </ui:CardExpander>
+
+        <!-- Connection Optimization -->
+        <ui:CardExpander Margin="0,0,0,16" IsExpanded="False">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="14" Text="Connection Optimization" />
+                    <TextBlock Margin="0,2,0,0" FontSize="12" Text="Advanced network settings for better performance" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+            
+            <StackPanel>
+                <controls:OptionControl Header="Reduce Network Lag" 
+                                       Description="Optimize network settings to minimize lag spikes">
+                    <ui:ToggleSwitch IsChecked="{Binding ReduceNetworkLag, Mode=TwoWay}"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Increase Bandwidth Limit" 
+                                       Description="Allow higher bandwidth for smoother gameplay">
+                    <ui:ToggleSwitch IsChecked="{Binding IncreaseBandwidth, Mode=TwoWay}"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Optimize Packet Size" 
+                                       Description="Adjust packet sizes for better network efficiency">
+                    <ui:ToggleSwitch IsChecked="{Binding OptimizePacketSize, Mode=TwoWay}"/>
+                </controls:OptionControl>
+
+                <controls:OptionControl Header="Enable Fast Preloading" 
+                                       Description="Preload game assets faster for quicker loading">
+                    <ui:ToggleSwitch IsChecked="{Binding EnableFastPreloading, Mode=TwoWay}"/>
+                </controls:OptionControl>
+            </StackPanel>
+        </ui:CardExpander>
+
+        <!-- Available Regions Info -->
+        <ui:CardControl Icon="GlobeLocation24" Header="Available Server Regions">
+            <StackPanel>
+                <TextBlock TextWrapping="Wrap" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,8">
+                    <Run Text="Roblox operates servers in multiple regions worldwide:"/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="11" Foreground="{DynamicResource TextFillColorTertiaryBrush}">
+                    <Run Text="• "/>
+                    <Run Text="North America (US East, US West, US Central)" FontWeight="SemiBold"/><LineBreak/>
+                    <Run Text="• "/>
+                    <Run Text="Europe (EU West, EU Central)" FontWeight="SemiBold"/><LineBreak/>
+                    <Run Text="• "/>
+                    <Run Text="Asia (Singapore, Japan, Hong Kong)" FontWeight="SemiBold"/><LineBreak/>
+                    <Run Text="• "/>
+                    <Run Text="South America (Brazil)" FontWeight="SemiBold"/><LineBreak/>
+                    <Run Text="• "/>
+                    <Run Text="Oceania (Australia)" FontWeight="SemiBold"/><LineBreak/>
+                </TextBlock>
+            </StackPanel>
+        </ui:CardControl>
+
+        <!-- Warning Card -->
+        <ui:CardControl Icon="Warning24" Header="Important Notice" Margin="0,16,0,0">
+            <TextBlock TextWrapping="Wrap" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}">
+                <Run Text="⚠️ Region selection uses FastFlags to optimize your connection."/><LineBreak/>
+                <Run Text="• Changes take effect on next game launch"/><LineBreak/>
+                <Run Text="• Some games may override region settings"/><LineBreak/>
+                <Run Text="• Lower ping = better gameplay experience"/>
+            </TextBlock>
+        </ui:CardControl>
+    </StackPanel>
+</ui:UiPage>

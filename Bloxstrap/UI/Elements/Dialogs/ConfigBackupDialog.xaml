@@ -1,4 +1,4 @@
-<base:WpfUiWindow x:Class="Voidstrap.UI.Elements.Dialogs.ConfigBackupDialog"
+﻿<base:WpfUiWindow x:Class="Voidstrap.UI.Elements.Dialogs.ConfigBackupDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,7 +7,7 @@
         xmlns:controls="clr-namespace:Voidstrap.UI.Elements.Controls"
         xmlns:base="clr-namespace:Voidstrap.UI.Elements.Base"
         mc:Ignorable="d"
-        Title="Bloodstrap Configuration Backup &amp; Restore" 
+        Title="GalaxyStrap Configuration Backup &amp; Restore" 
         Height="600"
         Width="800"
         ResizeMode="CanResize"
@@ -33,14 +33,14 @@
             <Border Background="{DynamicResource WindowBackgroundBlackOverlay}" />
         </Grid>
 
-        <ui:TitleBar Grid.Row="0" Padding="8" Title="Bloodstrap Configuration Backup &amp; Restore" Icon="ArrowExportLtr24" ShowMinimize="False" ShowMaximize="False" CanMaximize="False" KeyboardNavigation.TabNavigation="None" />
+        <ui:TitleBar Grid.Row="0" Padding="8" Title="GalaxyStrap Configuration Backup &amp; Restore" Icon="ArrowExportLtr24" ShowMinimize="False" ShowMaximize="False" CanMaximize="False" KeyboardNavigation.TabNavigation="None" />
         
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
             <StackPanel Margin="16">
                 
                 <!-- Header -->
                 <TextBlock Text="Configuration Manager" FontSize="28" FontWeight="Bold" Margin="0,0,0,8" Foreground="#FFEEEE"/>
-                <TextBlock Text="Export and import your complete Bloodstrap configuration including settings, FastFlags, and preferences" 
+                <TextBlock Text="Export and import your complete GalaxyStrap configuration including settings, FastFlags, and preferences" 
                            FontSize="14" Foreground="#FFCCCC" Margin="0,0,0,24" TextWrapping="Wrap"/>
 
                 <!-- Export Section -->

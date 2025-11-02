@@ -1,4 +1,4 @@
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using ICSharpCode.SharpZipLib.Zip;
 using Microsoft.Win32;
 using System;
@@ -121,7 +121,7 @@ namespace Voidstrap.UI.ViewModels.Settings
                 if (string.IsNullOrEmpty(value))
                 {
                     if (App.Settings.Prop.BootstrapperIcon == BootstrapperIcon.IconCustom)
-                        App.Settings.Prop.BootstrapperIcon = BootstrapperIcon.IconBloodstrap;
+                        App.Settings.Prop.BootstrapperIcon = BootstrapperIcon.IconGalaxyStrap;
                 }
                 else
                 {

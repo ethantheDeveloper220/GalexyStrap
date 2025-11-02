@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.Win32;
 
@@ -25,6 +25,7 @@ namespace Voidstrap.Extensions
             Theme.Dark,
             Theme.Light,
             Theme.Voidstrap,
+            Theme.Galaxy,
             Theme.UltraGray,
             Theme.Blue,
             Theme.Cyan,

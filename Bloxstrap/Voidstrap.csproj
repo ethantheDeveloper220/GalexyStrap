@@ -6,10 +6,10 @@
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
 		<UseWindowsForms>True</UseWindowsForms>
-		<ApplicationIcon>Bloodstrap.ico</ApplicationIcon>
-		<AssemblyName>Bloodstrap</AssemblyName>
-		<Version>1.3.0</Version>
-		<FileVersion>1.3.0</FileVersion>
+		<ApplicationIcon>GalaxyStrap.ico</ApplicationIcon>
+		<AssemblyName>GalaxyStrap</AssemblyName>
+		<Version>1.5.0</Version>
+		<FileVersion>1.5.0</FileVersion>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<RootNamespace>Voidstrap</RootNamespace>
@@ -72,7 +72,7 @@
 		<Resource Include="UI\Elements\Settings\Pages\Icon (1).png" />
 		<Resource Include="UI\Elements\Settings\Pages\klikos-mod-thumbnail.png" />
 		<Resource Include="UI\Elements\Settings\Pages\RobloxBB.png" />
-		<Resource Include="Bloodstrap.ico" />
+		<Resource Include="GalaxyStrap.ico" />
 		<Resource Include="Resources\Checkmark.ico" />
 		<Resource Include="Resources\CrossMark.ico" />
 		<Resource Include="Resources\Fonts\NotoSansThai-VariableFont_wdth,wght.ttf" />
@@ -87,6 +87,7 @@
 		<EmbeddedResource Include="UI\Style\Editor-Theme-Berry.xshd" />
 		<EmbeddedResource Include="UI\Style\Editor-Theme-UltraGray.xshd" />
 		<EmbeddedResource Include="UI\Style\Editor-Theme-Voidstrap.xshd" />
+		<EmbeddedResource Include="UI\Style\Editor-Theme-Galaxy.xshd" />
 		<EmbeddedResource Include="UI\Style\Editor-Theme-Blue.xshd" />
 		<EmbeddedResource Include="UI\Style\Editor-Theme-Red.xshd" />
         <EmbeddedResource Include="UI\Style\Editor-Theme-Dark.xshd" />
@@ -108,7 +109,7 @@
 		<EmbeddedResource Include="Resources\Icon2017.ico" />
 		<EmbeddedResource Include="Resources\Icon2019.ico" />
 		<EmbeddedResource Include="Resources\Icon2022.ico" />
-		<EmbeddedResource Include="Resources\IconBloodstrap.ico" />
+		<EmbeddedResource Include="Resources\IconGalaxyStrap.ico" />
 		<EmbeddedResource Include="Resources\IconHellstrapClassic2.ico" />
 		<EmbeddedResource Include="Resources\IconEarly2015.ico" />
 		<EmbeddedResource Include="Resources\IconLate2015.ico" />

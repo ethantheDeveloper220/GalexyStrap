@@ -11,7 +11,7 @@ namespace Voidstrap
         // Change these values to rebrand
         // ========================================
         
-        public const string PROJECT_NAME = "Bloodstrap";
+        public const string PROJECT_NAME = "GalaxyStrap";
         public const string PROJECT_OWNER = "ethantheDeveloper220";
         public const string PROJECT_REPO = "vibetrap";
         

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
@@ -309,7 +309,7 @@ namespace Voidstrap.UI.Elements.Settings.Pages
                 // Create a new window for web login
                 var loginWindow = new Window
                 {
-                    Title = "Roblox Login - Bloodstrap",
+                    Title = "Roblox Login - GalaxyStrap",
                     Width = 800,
                     Height = 600,
                     WindowStartupLocation = WindowStartupLocation.CenterScreen

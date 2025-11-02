@@ -1,4 +1,4 @@
-﻿<ui:UiPage
+<ui:UiPage
     x:Class="Voidstrap.UI.Elements.Settings.Pages.FastFlagEditorPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -97,7 +97,7 @@
                 Margin="0,0,10,16"
                 VerticalAlignment="Top"
                 Click="FlagProfiles_Click"
-                Content="Profiles"
+                Content="Presets"
                 Icon="Edit28" />
             <ui:Button
                 Width="120"
@@ -112,6 +112,16 @@
                 VerticalAlignment="Top"
                 Click="ToggleButton_Click"
                 Content="{x:Static resources:Strings.Menu_FastFlagEditor_ShowPresetFlags}" />
+        </WrapPanel>
+
+        <!-- Quick Filters -->
+        <WrapPanel Grid.Row="3" Orientation="Horizontal" Margin="0,0,0,8">
+            <TextBlock Text="Quick Filters:" VerticalAlignment="Center" Margin="0,0,8,0" FontWeight="Medium" />
+            <ui:Button Margin="0,0,4,0" Height="28" Padding="8,0" Content="Graphics" Click="FilterGraphics_Click" />
+            <ui:Button Margin="0,0,4,0" Height="28" Padding="8,0" Content="Network" Click="FilterNetwork_Click" />
+            <ui:Button Margin="0,0,4,0" Height="28" Padding="8,0" Content="Performance" Click="FilterPerformance_Click" />
+            <ui:Button Margin="0,0,4,0" Height="28" Padding="8,0" Content="Debug" Click="FilterDebug_Click" />
+            <ui:Button Margin="0,0,4,0" Height="28" Padding="8,0" Content="Clear Filter" Click="ClearFilter_Click" Appearance="Secondary" />
         </WrapPanel>
 
         <!-- Flag Count Text -->
@@ -137,7 +147,7 @@
 
         <!--  Search Bar  -->
         <Grid
-            Grid.Row="3"
+            Grid.Row="4"
             Height="40"
             Margin="0,0,1,5">
             <ui:TextBox
@@ -175,7 +185,7 @@
         </Grid>
 
         <Border
-    Grid.Row="4"
+    Grid.Row="5"
     CornerRadius="8"
     Background="{DynamicResource ControlFillColorPrimaryBrush}"
     BorderBrush="{DynamicResource ControlElevationBorderBrush}"

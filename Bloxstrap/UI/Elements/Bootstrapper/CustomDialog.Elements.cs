@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
@@ -401,7 +401,7 @@ namespace Voidstrap.UI.Elements.Bootstrapper
             dialog.Margin = new Thickness(0, 0, 0, 0);
             dialog.Padding = new Thickness(0, 0, 0, 0);
 
-            string? title = xmlElement.Attribute("Title")?.Value?.ToString() ?? "Bloodstrap";
+            string? title = xmlElement.Attribute("Title")?.Value?.ToString() ?? "GalaxyStrap";
             dialog.Title = title;
 
             bool ignoreTitleBarInset = ParseXmlAttribute<bool>(xmlElement, "IgnoreTitleBarInset", false);
@@ -443,7 +443,7 @@ namespace Voidstrap.UI.Elements.Bootstrapper
             dialog.RootTitleBar.ShowMinimize = ParseXmlAttribute<bool>(xmlElement, "ShowMinimize", true);
             dialog.RootTitleBar.ShowClose = ParseXmlAttribute<bool>(xmlElement, "ShowClose", true);
 
-            string? title = xmlElement.Attribute("Title")?.Value?.ToString() ?? "Bloodstrap";
+            string? title = xmlElement.Attribute("Title")?.Value?.ToString() ?? "GalaxyStrap";
             dialog.RootTitleBar.Title = title;
 
             return new DummyFrameworkElement(); // dont add anything
